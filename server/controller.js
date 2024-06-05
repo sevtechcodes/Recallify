@@ -17,25 +17,36 @@ const createMemory = async (req, res) => {
   try {
     const memory = new Memory({ title, media, description, child, location, date, category });
     await memory.save();
+		//The media metadata (file paths, MIME types, etc.) is stored in the MongoDB database under the Memory document.
     res.status(201).json(memory);
   } catch (error) {
     res.status(500).json({ error: 'Server error' });
   }
 };
 
-//for uploading media
-const uploadMedia =   async (req, res) => {
-	try {
-		const { path, mimetype } = req.file;
-		const file = new File({
-			file_path: path,
-			file_mimetype: mimetype
-		});
-		await file.save();
-		res.send('file uploaded successfully.');
-	} catch (error) {
-		res.status(400).send('Error while uploading file. Try again later.');
-	}
+//for uploading media from my device
+const uploadMedia = async (req, res) => {
+  try {
+    const { title, description, child, location, category } = req.body;
+    const files = req.files.map(file => ({
+      file_path: file.path,
+      file_mimetype: file.mimetype,
+    }));
+    
+    const memory = new Memory({
+      title,
+      media: files,
+      description,
+      child,
+      location,
+      category,
+    });
+    
+    await memory.save();
+    res.send('Media uploaded successfully.');
+  } catch (error) {
+    res.status(400).send('Error while uploading media. Try again later.');
+  }
 };
 
 
