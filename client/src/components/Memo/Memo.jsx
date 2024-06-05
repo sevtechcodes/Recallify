@@ -18,8 +18,8 @@ const Add = ({ formData, onChange, onSave }) => {
         <div className="add-media">
 					<div className='media-area' value={media}></div>
 					<p>Add Media</p>
-          <div className="media-icon upload-media">📎</div>
-          <div className="media-icon camera">📷</div>
+          <div className="media-icon upload-media">📎</div> {/* helps me to upload media from my device */}
+          <div className="media-icon camera">📷</div> {/* helps me to reach my device camera to click pic or video and upload here */}
         </div>
         <textarea
           className="add-description"

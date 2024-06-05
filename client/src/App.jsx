@@ -5,7 +5,6 @@ import MemoList from './components/MemoList/MemoList';
 import axios from 'axios';
 import Add from './components/Memo/Memo';
 import DetailView from './components/Memo/DetailView';
-import { generateMockData } from './service';
 
 // const API_URL = 'http://localhost:3030';
 
@@ -74,11 +73,12 @@ const App = () => {
 
 
 				<Navbar/>
+				{/* sent memories you get from the database to be listed */}
 				<MemoList memories={memories}></MemoList>
+				<button>+ Create New </button>
 
       	<Add formData={formData} onChange={handleChange} onSave={handleSave} />
 				<DetailView formData={formData} onEdit={handleEdit} />
-
 
 				{/* {isDetailView ? (
         <DetailView formData={formData} onEdit={handleEdit} />
