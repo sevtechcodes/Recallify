@@ -4,11 +4,12 @@
   top: 0;
   height: 9vh;
   width: 100vw;
-  background: #111;
+  background: #1c1b1b;
   padding: 0 7.5vh;
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
+
 }
 
 .navbar_logo {

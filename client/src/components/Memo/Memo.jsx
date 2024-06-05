@@ -17,8 +17,9 @@ const Add = ({ formData, onChange, onSave }) => {
       <div className="add-media-description">
         <div className="add-media">
 					<div className='media-area' value={media}></div>
-          <div className="media-icon">📎</div>
-          <div className="media-icon">📷</div>
+					<p>Add Media</p>
+          <div className="media-icon upload-media">📎</div>
+          <div className="media-icon camera">📷</div>
         </div>
         <textarea
           className="add-description"

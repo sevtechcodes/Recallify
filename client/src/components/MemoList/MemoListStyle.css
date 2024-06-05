@@ -1,0 +1,16 @@
+.memo_list_container{
+	background-color: antiquewhite;
+	margin-top: 50px;
+	font-size: 1em;
+	font-weight: 500;
+	margin-bottom: 50px;
+	padding-left: 5vw;
+}
+
+.list_scroll{
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
