@@ -1,17 +1,14 @@
 const mongoose = require('mongoose');
-require('dotenv').config();
+require('dotenv').config(); // This line loads the .env file
 
 const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/Recallify';
 
 const connectDB = async () => {
   try {
-    await mongoose.connect(mongoURI,  {
-			useNewUrlParser: true,
-			useUnifiedTopology: true,
-		});
+    await mongoose.connect(mongoURI);
     console.log('MongoDB connected');
   } catch (error) {
-    console.error(error.message);
+    console.error('Error connecting to MongoDB:', error.message);
     process.exit(1);
   }
 };

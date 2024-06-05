@@ -1,4 +1,15 @@
-const Memory = require('./models/index');
+const Memory = require('./models/Memory');
+const File = require('./models/File'); // Adjust the path to your File model
+
+const getMemories = async (req, res) => {
+  try {
+    const memories = await Memory.find().sort({ date: -1 });
+    res.json(memories);
+  } catch (error) {
+    res.status(500).json({ error: 'Server error' });
+  }
+};
+
 
 const createMemory = async (req, res) => {
   const { title, description, child, location, date, category} = req.body;
@@ -12,14 +23,22 @@ const createMemory = async (req, res) => {
   }
 };
 
-const getMemories = async (req, res) => {
-  try {
-    const memories = await Memory.find().sort({ date: -1 });
-    res.json(memories);
-  } catch (error) {
-    res.status(500).json({ error: 'Server error' });
-  }
+//for uploading media
+const uploadMedia =   async (req, res) => {
+	try {
+		const { path, mimetype } = req.file;
+		const file = new File({
+			file_path: path,
+			file_mimetype: mimetype
+		});
+		await file.save();
+		res.send('file uploaded successfully.');
+	} catch (error) {
+		res.status(400).send('Error while uploading file. Try again later.');
+	}
 };
+
+
 
 const updateMemory = async (req, res) => {
 	const { id } = req.params;
@@ -47,4 +66,5 @@ module.exports = {
 	createMemory,
   updateMemory,
   deleteMemory,
+	uploadMedia,
 };
