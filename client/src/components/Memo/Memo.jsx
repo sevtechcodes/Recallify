@@ -3,7 +3,7 @@ import React from 'react';
 import './style.css';
 
 const Add = ({ formData, onChange, onSave }) => {
-  const { title, description, child, location, date, category } = formData;
+  const { title,  media, description, child, location, date, category } = formData;
 
   return (
     <div className="add-container">
@@ -16,6 +16,7 @@ const Add = ({ formData, onChange, onSave }) => {
       />
       <div className="add-media-description">
         <div className="add-media">
+					<div className='media-area' value={media}></div>
           <div className="media-icon">📎</div>
           <div className="media-icon">📷</div>
         </div>
@@ -26,14 +27,16 @@ const Add = ({ formData, onChange, onSave }) => {
           onChange={(e) => onChange('description', e.target.value)}
         ></textarea>
       </div>
-      <div className="add-details">
+      <div className="add-details"> { /*you can improve this section later*/}
         <div>Child: {child}</div>
         <div>Location: {location}</div>
         <div>Date: {date}</div>
         <div>Category: {category}</div>
       </div>
       <div className="add-actions">
-        <button className="cancel-button" onClick={() => { /* Add cancel logic */ }}>
+        <button className="cancel-button" onClick={() => 
+				{ /* Add cancel logic. It will not create anything, empty if any area is filled
+			 and go back to list component */ }}>
           Cancel
         </button>
         <button className="save-button" onClick={onSave}>
