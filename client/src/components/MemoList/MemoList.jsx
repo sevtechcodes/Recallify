@@ -2,7 +2,11 @@
 import './MemoListStyle.css';
 
 //I will pass memos inside this list
-const MemoList = ({memories}) =>(
+const MemoList = ({memories}) =>{
+	if (memories.length === 0) {
+    return <div>No memories yet</div>;
+  }
+	return (
 		<div className='memo_list_container'>
 			<p>This is My memory list</p>
 			<div className='list_scroll'>
@@ -25,7 +29,8 @@ const MemoList = ({memories}) =>(
 			</div>
 
 		</div>
+	);
 
-);
+};
 
 export default MemoList

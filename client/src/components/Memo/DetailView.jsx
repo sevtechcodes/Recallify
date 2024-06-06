@@ -1,12 +1,13 @@
 import React from 'react';
 import './style.css';
+import { deleteMemory } from '../../service';
 
 const DetailView = ({ formData, onEdit }) => {
   const { title, description, child, location, date, category } = formData;
 
   return (
     <div className="detail-view-container">
-			<button className='close-view'>X</button>
+			<button className='close-view'>X</button>  {/* When click, it will take us to the main page list */}
       <h1>{title}</h1>
 			{/* src="../client/public/image.png" */}
       <img src="https://via.placeholder.com/400x200" alt="Media" className="detail-image" />
