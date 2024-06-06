@@ -5,7 +5,7 @@ import './MemoListStyle.css';
 const MemoList = ({memories}) =>(
 		<div className='memo_list_container'>
 			<p>This is My memory list</p>
-			<div className='list-scroll'>
+			<div className='list_scroll'>
 				<ul>
 					{memories.map(memory => (
 						<li key={memory._id}> 

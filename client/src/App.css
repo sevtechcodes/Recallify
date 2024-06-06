@@ -1,0 +1,15 @@
+.app-container{
+	display: flex;
+	align-items: center;
+}
+
+.first-section{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.create-button{
+	background-color: green;
+	width: 400px;
+}

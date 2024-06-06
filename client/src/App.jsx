@@ -2,39 +2,35 @@ import React, { useState, useEffect, createContext } from 'react';
 import './App.css'
 import Navbar from './components/Navbar/Navbar';
 import MemoList from './components/MemoList/MemoList';
-import axios from 'axios';
 import Add from './components/Memo/Memo';
 import DetailView from './components/Memo/DetailView';
+import {getAllMemories} from './service';
 
-// const API_URL = 'http://localhost:3030';
+
 
 const App = () => {
   const [memories, setMemories] = useState([
-		{
-      title: "Melissa's first street crossing",
-      media: "../client/public/image.png",
-      description: "Body text for your whole article or post. We'll put in some lorem ipsum to show how a filled-out page might look.",
-      child: 'Melissa',
-      location: 'Berlin',
-      date: '2024-06-01',
-      category: 'Travel'
-    },
-    {
-      title: "Melissa's day at the park",
-      media: "../client/public/park.png",
-      description: "A wonderful day at the park with lots of fun activities.",
-      child: 'Melissa',
-      location: 'Berlin',
-      date: '2024-06-02',
-      category: 'Leisure'
-    }
-	]);
 
-  // useEffect(() => {
-  //   	axios.get(`${API_URL}/memories`)
-  //     .then(response => setMemories(response.data))
-  //     .catch(error => console.log(error));
-  // }, []);
+//Mockup data
+// {
+//     title: 'Sevim',
+// 		media: '',
+// 		description: '',
+//     child: 'Melissa',
+//     location: 'Berlin',
+//     date: '2024-06-01',
+//     category: 'Travel',
+// }
+
+	]);
+	
+	useEffect(() => {
+    const fetchMemories = async () => {
+      const memories = await getAllMemories();
+      setMemories(memories);
+    };
+    fetchMemories();
+  }, []);
 
 
 	//my initial state of the add memory component
@@ -42,10 +38,10 @@ const App = () => {
     title: '',
 		media: '',
 		description: '',
-    child: 'Melissa',
-    location: 'Berlin',
-    date: '2024-06-01',
-    category: 'Travel',
+    child: '',
+    location: '',
+    date: '',
+    category: '',
   });
 
 	const [isDetailView, setIsDetailView] = useState(false);
@@ -74,8 +70,11 @@ const App = () => {
 
 				<Navbar/>
 				{/* sent memories you get from the database to be listed */}
-				<MemoList memories={memories}></MemoList>
-				<button>+ Create New </button>
+				<div className='first-section'>
+					<MemoList memories={memories}></MemoList>
+					<button className='create-button'>+ Create New </button>
+				</div>
+
 
       	<Add formData={formData} onChange={handleChange} onSave={handleSave} />
 				<DetailView formData={formData} onEdit={handleEdit} />
