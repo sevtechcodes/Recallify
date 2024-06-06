@@ -1,17 +1,24 @@
-import React, { useState, useEffect, createContext } from 'react';
-import './App.css'
+import React, { useState, useEffect } from 'react';
+import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import MemoList from './components/MemoList/MemoList';
 import Add from './components/Memo/Add';
-import DetailView from './components/Memo/DetailView';
-import {getAllMemories, createMemory, updateMemory, deleteMemory} from './service';
-
-
+import { getAllMemories, createMemory } from './service';
 
 const App = () => {
   const [memories, setMemories] = useState([]);
-	
-	useEffect(() => {
+  const [isFormVisible, setIsFormVisible] = useState(false);
+  const [formData, setFormData] = useState({
+    title: '',
+    media: '',
+    description: '',
+    child: '',
+    location: '',
+    date: '',
+    category: '',
+  });
+
+  useEffect(() => {
     const fetchMemories = async () => {
       const memories = await getAllMemories();
       setMemories(memories);
@@ -19,25 +26,14 @@ const App = () => {
     fetchMemories();
   }, []);
 
-
-	//my initial state of the add memory component
-  const [formData, setFormData] = useState({
-    title: '',
-		media: '',
-		description: '',
-    child: '',
-    location: '',
-    date: '',
-    category: '',
-  });
-
-  // const handleSave = (newMemory) => {
-  //   setMemories((prevMemories) => sortItems([...prevMemories, newMemory]));
-  // };
-
-	const handleSave = async (newMemoryData) => {
-    const newMemory = await createMemory(newMemoryData);
-    setMemories((prevMemories) => sortMemories([...prevMemories, newMemory]));
+  const handleSave = async (newMemoryData) => {
+    try {
+      const newMemory = await createMemory(newMemoryData);
+      setMemories((prevMemories) => sortMemories([...prevMemories, newMemory]));
+      setIsFormVisible(false); // Hide form after saving
+    } catch (error) {
+      console.error('Error saving memory:', error);
+    }
   };
 
   const handleInputChange = (field, value) => {
@@ -47,26 +43,22 @@ const App = () => {
     }));
   };
 
-
   const sortMemories = (memories) => {
     return memories.sort((a, b) => new Date(a.date) - new Date(b.date));
   };
 
   return (
-    <>
-		  <div className="app-container">
-				<Navbar/>
-				<div className='first-section'>
-					<MemoList memories={memories}></MemoList>
-					<button className='create-button' formData={formData}>+ Create New </button>   {/* This will popup the add memo */}
-				</div>
+    <div className="app-container">
+      <Navbar />
+      <div className='first-section'>
+        <MemoList memories={memories} />
+        <button className='create-button' onClick={() => setIsFormVisible(true)}>+ Create New</button>
+      </div>
+      {isFormVisible && (
+        <Add formData={formData} onChange={handleInputChange} onSave={handleSave} />
+      )}
+    </div>
+  );
+};
 
-      	<Add formData={formData} onSave={handleSave} onChange={handleInputChange}/>
-				{/* <DetailView formData={formData} /> */}
-
-    	</div>
-    </>
-  )
-}
-
-export default App
+export default App;

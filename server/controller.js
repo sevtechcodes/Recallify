@@ -10,19 +10,41 @@ const getMemories = async (req, res) => {
   }
 };
 
-
 const createMemory = async (req, res) => {
-  const { title, description, child, location, date, category} = req.body;
-	const media = req.file ? `/uploads/${req.file.filename}` : req.body.media;
+  const { title, media, description, child, location, date, category } = req.body;
+
   try {
-    const memory = new Memory({ title, media, description, child, location, date, category });
+    // Create an object with the non-empty fields only
+    const memoryData = {};
+    if (title) memoryData.title = title;
+    if (media) memoryData.media = media;
+    if (description) memoryData.description = description;
+    if (child) memoryData.child = child;
+    if (location) memoryData.location = location;
+    if (date) memoryData.date = date;
+    if (category) memoryData.category = category;
+
+    // Create the memory only if there is at least one field with non-empty value
+    if (Object.keys(memoryData).length === 0) {
+      return res.status(400).json({ error: 'No valid fields provided' });
+    }
+
+    const memory = new Memory(memoryData);
     await memory.save();
-		//The media metadata (file paths, MIME types, etc.) is stored in the MongoDB database under the Memory document.
+    
     res.status(201).json(memory);
   } catch (error) {
+    console.log("Creating Error: ", error);
     res.status(500).json({ error: 'Server error' });
   }
 };
+
+
+
+
+
+
+
 
 //for uploading media from my device
 const uploadMedia = async (req, res) => {
