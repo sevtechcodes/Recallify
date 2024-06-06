@@ -1,17 +1,29 @@
-
-import React from 'react';
+import React, { useState } from 'react';
 import './style.css';
 
 const Add = ({ formData, onChange, onSave }) => {
-  const { title, media, description, child, location, date, category } = formData;
+  const { title, description, child, location, date, category } = formData;
+  const [mediaFile, setMediaFile] = useState(null); // State to store the selected media file
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('Media', mediaFile);
+
+    const formDataToSend = new FormData();
+    formDataToSend.append('title', title);
+    formDataToSend.append('description', description);
+    formDataToSend.append('child', child);
+    formDataToSend.append('location', location);
+    formDataToSend.append('date', date);
+    formDataToSend.append('category', category);
+    if (mediaFile) {
+      formDataToSend.append('media', mediaFile); // Append the media file to the form data
+    }
+
     try {
-      const cleanData = { ...formData };
-      await onSave(cleanData);
+      await onSave(formDataToSend); // Pass the FormData object to the onSave function
       onChange('title', '');
-      onChange('media', '');
+      setMediaFile(null);
       onChange('description', '');
       onChange('child', '');
       onChange('location', '');
@@ -22,7 +34,12 @@ const Add = ({ formData, onChange, onSave }) => {
     }
   };
 
-  return (
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setMediaFile(file);
+  };
+
+	return (
     <div className="add-container">
       <form onSubmit={handleSubmit}>
         <h2>Create a new event</h2>
@@ -36,11 +53,17 @@ const Add = ({ formData, onChange, onSave }) => {
         <div className="add-media-description">
           <div className="add-media">
             <p>Add Media</p>
-
-            <div className="media-icon upload-media" onClick={() => alert('Upload media')}>
+            <div className="media-icon upload-media">
               📎
+              <input
+                type="file"
+                accept="image/*,video/*"
+                onChange={handleFileChange}
+                style={{ display: 'none' }}
+                id="file-upload"
+              />
+              <label htmlFor="file-upload" style={{ cursor: 'pointer' }}>Upload Media</label>
             </div>
-
             <div className="media-icon camera" onClick={() => alert('Open camera')}>
               📷
             </div>
@@ -104,3 +127,4 @@ const Add = ({ formData, onChange, onSave }) => {
 };
 
 export default Add;
+

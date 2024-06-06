@@ -54,8 +54,15 @@ const App = () => {
         <MemoList memories={memories} />
         <button className='create-button' onClick={() => setIsFormVisible(true)}>+ Create New</button>
       </div>
+
+
       {isFormVisible && (
-        <Add formData={formData} onChange={handleInputChange} onSave={handleSave} />
+        <Add 
+				formData={formData} 
+				onChange={handleInputChange} 
+				onSave={handleSave} 
+				
+				/>
       )}
     </div>
   );

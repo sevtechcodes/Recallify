@@ -18,9 +18,7 @@ export const createMemory = async (memoryData) => {
 	console.log(memoryData)
   try {
     const response = await axios.post(apiUrl, memoryData);
-
     return response.data;
-
   } catch (error) {
     console.error('Error adding item:', error);
     throw error;
