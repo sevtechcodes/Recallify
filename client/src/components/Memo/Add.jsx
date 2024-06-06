@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import Webcam from 'react-webcam';
 import './style.css';
 
 const Add = ({ formData, onChange, onSave }) => {
   const { title, description, child, location, date, category } = formData;
   const [mediaFile, setMediaFile] = useState(null); // State to store the selected media file
+  const [showCamera, setShowCamera] = useState(false); // State to show/hide camera
+  const webcamRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +42,18 @@ const Add = ({ formData, onChange, onSave }) => {
     setMediaFile(file);
   };
 
-	return (
+  const handleTakePicture = () => {
+    const imageSrc = webcamRef.current.getScreenshot();
+    fetch(imageSrc)
+      .then(res => res.blob())
+      .then(blob => {
+        const file = new File([blob], 'captured_image.png', { type: 'image/png' });
+        setMediaFile(file);
+        setShowCamera(false);
+      });
+  };
+
+  return (
     <div className="add-container">
       <form onSubmit={handleSubmit}>
         <h2>Create a new event</h2>
@@ -64,10 +78,21 @@ const Add = ({ formData, onChange, onSave }) => {
               />
               <label htmlFor="file-upload" style={{ cursor: 'pointer' }}>Upload Media</label>
             </div>
-            <div className="media-icon camera" onClick={() => alert('Open camera')}>
-              📷
+            <div className="media-icon camera" onClick={() => setShowCamera(true)}>
+              Take Pic📷
             </div>
           </div>
+          {showCamera && (
+            <div className="camera-container">
+              <Webcam
+                audio={false}
+                ref={webcamRef}
+                screenshotFormat="image/png"
+              />
+              <button type="button" onClick={handleTakePicture}>Take Picture</button>
+              <button type="button" onClick={() => setShowCamera(false)}>Cancel</button>
+            </div>
+          )}
           <textarea
             className="add-description"
             placeholder="Type description"
@@ -127,4 +152,3 @@ const Add = ({ formData, onChange, onSave }) => {
 };
 
 export default Add;
-
