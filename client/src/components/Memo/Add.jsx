@@ -5,8 +5,6 @@ import './style.css';
 
 const Add = ({ formData, onChange, onSave }) => {
   const { title,  media, description, child, location, date, category } = formData;
-
-
 	const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -18,6 +16,8 @@ const Add = ({ formData, onChange, onSave }) => {
       setLocation('');
 			setDate('');
 			setCategory('');
+
+			
       if (onSave) {
         onSave(newMemory);
       }
@@ -41,16 +41,19 @@ const Add = ({ formData, onChange, onSave }) => {
 				<div className="add-media-description">
 					<div className="add-media">
 						<p>Add Media</p>
+
 						{/* helps me to upload media from my device */}
 						<div className="media-icon upload-media"
 						value={media}
 						onChange={(e) => onChange('description', e.target.value)}
+						onClick={() => alert('Upload media')}
 						>📎</div> 
 
 						{/* helps me to reach my device camera to click pic or video and upload here */}
 						<div className="media-icon camera"
 						value={media}
 						onChange={(e) => onChange('description', e.target.value)}
+						onClick={() => alert('Open camera')}
 						>📷</div> 
 					</div>
 					<textarea
@@ -62,23 +65,46 @@ const Add = ({ formData, onChange, onSave }) => {
 					></textarea>
 				</div>
 				<div className="add-details"> { /*you can improve this section later*/}
-					<div>: {child}</div>
-					<div>Location: {location}</div>
-					<div>Date: {date}</div>
-					{/* <input 
-          type="datetime-local" 
-          value={date} 
-          onChange={(e) => setDate(e.target.value)} 
-          placeholder="Select event date" 
-          required
-          min={minDate} // Set minimum date
-        	/> */}
-					<div>Category: {category}</div>
+					<div>
+            <label>Child: </label>
+            <input
+              type="text"
+              value={child}
+              onChange={(e) => onChange('child', e.target.value)}
+            />
+          </div>
+
+					<div>
+            <label>Location: </label>
+            <input
+              type="text"
+              value={location}
+              onChange={(e) => onChange('location', e.target.value)}
+            />
+          </div>
+
+					<div>
+            <label>Date: </label>
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate('date', e.target.value)}
+            />
+          </div>
+					<div>
+            <label>Category: </label>
+            <input
+              type="text"
+              value={category}
+              onChange={(e) => onChange('category', e.target.value)}
+            />
+          </div>
 				</div>
 				<div className="add-actions">
-					<button className="cancel-button" onClick={() => 
-					{ /* Add cancel logic. It will not create anything, empty if any area is filled
-				and go back to list component */ }}>
+					<button 
+					type="button"
+					className="cancel-button" 
+					onClick={() => {/* go back to main page */} }>
 						Cancel
 					</button>
 					<button className="save-button" type="submit"  onClick={onSave}>

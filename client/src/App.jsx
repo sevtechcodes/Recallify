@@ -31,22 +31,24 @@ const App = () => {
     category: '',
   });
 
-	// const [isDetailView, setIsDetailView] = useState(false); //to view edit page
-  // const [isFormVisible, setIsFormVisible] = useState(false); //for add 
-
-  // const handleChange = (name, value) => {
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value
-  //   });
+  // const handleSave = (newMemory) => {
+  //   setMemories((prevMemories) => sortItems([...prevMemories, newMemory]));
   // };
 
-  const handleSave = (newMemory) => {
-    setMemories((prevMemories) => sortItems([...prevMemories, newMemory]));
+	const handleSave = async (newMemoryData) => {
+    const newMemory = await createMemory(newMemoryData);
+    setMemories((prevMemories) => sortMemories([...prevMemories, newMemory]));
+  };
+
+  const handleInputChange = (field, value) => {
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [field]: value,
+    }));
   };
 
 
-  const sortItems = (memories) => {
+  const sortMemories = (memories) => {
     return memories.sort((a, b) => new Date(a.date) - new Date(b.date));
   };
 
@@ -59,8 +61,8 @@ const App = () => {
 					<button className='create-button' formData={formData}>+ Create New </button>   {/* This will popup the add memo */}
 				</div>
 
-      	<Add formData={formData} onSave={handleSave}/>
-				<DetailView formData={formData} />
+      	<Add formData={formData} onSave={handleSave} onChange={handleInputChange}/>
+				{/* <DetailView formData={formData} /> */}
 
     	</div>
     </>
