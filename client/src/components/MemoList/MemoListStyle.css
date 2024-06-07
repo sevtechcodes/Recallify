@@ -21,6 +21,29 @@ display: flex column;
 
 }
 
+.edit-link{
+	display: flex;
+	justify-content: end;
+	/* align-items: end; */
+}
+
+.memory-details{
+	display:flex;
+	flex-direction: row;
+
+}
+
+.description{
+	height: 100px;
+	background-color: yellow;
+	border: solid 1 px;
+}
+
+.media-info{
+	height: 200px;
+	width: 200px;
+}
+
 ul {
 	list-style: none; /* Removes bullet points */
 	padding: 0; /* Optional: removes default padding */

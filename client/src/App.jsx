@@ -61,17 +61,14 @@ const App = () => {
 				<div className='sticky-container'>
 					 <button className='create-button' onClick={() => setIsFormVisible(true)}>+ Create New</button>
 				</div>
-        
-
       </div>
-
-
 
       {isFormVisible && (
         <Add 
 				formData={formData} 
 				onChange={handleInputChange} 
 				onSave={handleSave} 
+				setIsFormVisible={setIsFormVisible}
 				
 				/>
       )}

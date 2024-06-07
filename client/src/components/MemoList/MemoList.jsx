@@ -13,15 +13,23 @@ const MemoList = ({memories}) =>{
 				<ul>
 					{memories.map(memory => (
 						<li key={memory._id} className='item'> 
-							<a>Edit</a> { /*edit will take us to the DetailView page. Maybe like <Link to={`/edit/${memory._id}`}>Edit</Link> */}
+							<div className='edit-link'>
+								<a >Edit</a> { /*edit will take us to the DetailView page. Maybe like <Link to={`/edit/${memory._id}`}>Edit</Link> */}
+							</div>
 							<h1>{memory.title}</h1>
-							<img src={memory.media} alt="Media" className="detail-image"></img>
-							<p>{memory.description}</p>
-							<div className="detail-info">
-								<div>Person: {memory.child}</div>
-								<div>Location: {memory.location}</div>
-								<div>Date: {memory.date}</div>
-								<div>Category: {memory.category}</div>
+
+						<div className='memory-details'>
+								<div className='media-info'>
+									<img src={memory.media} alt="Media" className="detail-image"></img>
+								</div>
+						
+								<div className="detail-info">
+									<p className='description'>{memory.description}</p>
+									<div>Person: {memory.child}</div>
+									<div>Location: {memory.location}</div>
+									<div>Date: {memory.date}</div>
+									<div>Category: {memory.category}</div>
+								</div>
 							</div>
 						</li>
 					))}

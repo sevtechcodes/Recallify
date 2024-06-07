@@ -5,7 +5,7 @@ import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 
-const Add = ({ formData, onChange, onSave }) => {
+const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
   const { title, description, child, location, date, category } = formData;
   const [mediaFile, setMediaFile] = useState(null); // State to store the selected media file
   const [showCamera, setShowCamera] = useState(false); // State to show/hide camera
@@ -52,8 +52,17 @@ const Add = ({ formData, onChange, onSave }) => {
       });
   };
 
-	const onCancel =()=>{
-		onSave(null)
+	const onCancel = () => {
+		console.log("Cancel button clicked"); // Log to check if the function is called
+		onChange('title', '');
+		setMediaFile(null);
+		onChange('description', '');
+		onChange('child', '');
+		onChange('location', '');
+		onChange('date', '');
+		// onChange('category', '');
+		setCategory('category', '');
+		setIsFormVisible(false); // Close the form
 	};
 
   return (
@@ -104,21 +113,27 @@ const Add = ({ formData, onChange, onSave }) => {
 
         <div className="add-details">
           <div>
-            <label>Child: </label>
-            <input
-              type="text"
-              value={child}
-              onChange={(e) => onChange('child', e.target.value)}
-            />
+            <label>Person: </label>
+						<select value={child} onChange={(e) => onChange('child', e.target.value)}>
+							<option value="">Select Person</option>
+							<option value="Theo">Theo</option>
+							<option value="Sevim">Sevim</option>
+						</select>
           </div>
-          <div>
+
+					<div>
             <label>Location: </label>
-            <input
-              type="text"
-              value={location}
-              onChange={(e) => onChange('location', e.target.value)}
-            />
+						<select value={location} onChange={(e) => onChange('location', e.target.value)}>
+							<option value="">Select Location</option>
+							<option value="Berlin">Berlin</option>
+							<option value="Istanbul">Istanbul</option>
+							<option value="Mumbai">Mumbai</option>
+							<option value="Other">Other</option>
+						</select>
           </div>
+
+
+
           <div>
             <label>Date: </label>
             <input
@@ -129,15 +144,18 @@ const Add = ({ formData, onChange, onSave }) => {
           </div>
           <div>
             <label>Category: </label>
-            <input
-              type="text"
-              value={category}
-              onChange={(e) => onChange('category', e.target.value)}
-            />
+						<select value={category} onChange={(e) => onChange('category', e.target.value)}>
+							<option value="">Select Category</option>
+							<option value="birthday">Birthday</option>
+							<option value="travel">Travel</option>
+							<option value="general">General</option>
+							<option value="occasions">Occasions</option>
+							<option value="friends">Friends</option>
+						</select>
           </div>
         </div>
         <div className="add-actions">
-          <button type="button" className="cancel-button" onClick={() => oncancel()}>
+          <button type="button" className="cancel-button" onClick={() => onCancel()}>
             Cancel
           </button>
           <button className="save-button" type="submit">
