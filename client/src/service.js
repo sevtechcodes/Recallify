@@ -45,16 +45,3 @@ export const deleteMemory = async (id) => {
     throw error;
   }
 };
-
-
-
-//Check this again.
-// export const uploadMedia =  async (title, media, description, child, location, date, category) => {
-// 		try {
-// 			const response = await axios.post(`${apiUrl}/${uploads}`, { title, media, description, child, location, date, category});
-// 			return response.data;
-// 		} catch (error) {
-// 			console.error('Error adding item:', error);
-// 			throw error;
-// 		}
-// };

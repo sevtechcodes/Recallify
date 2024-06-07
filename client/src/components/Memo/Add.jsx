@@ -2,10 +2,10 @@ import React, { useState, useRef } from 'react';
 import Webcam from 'react-webcam';
 import './style.css';
 import { storage } from '../../firebase';
-import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
+import { ref, getDownloadURL, uploadBytes } from '../../firebase/storage';
 
 const Add = ({ formData, onChange, onSave }) => {
-  const [imgUrl, setImgUrl] = useState(null);
+  // const [imgUrl, setImgUrl] = useState(null);
   const { title, description, child, location, date, category } = formData;
   const [mediaFile, setMediaFile] = useState(null); // State to store the selected media file
   const [showCamera, setShowCamera] = useState(false); // State to show/hide camera
@@ -20,24 +20,6 @@ const Add = ({ formData, onChange, onSave }) => {
       const storageRef = ref(storage, `files/${mediaFile.name}`);
       const uploadTask = await uploadBytes(storageRef, mediaFile);
 			mediaUrl = await getDownloadURL(ref(storage, uploadTask.metadata.fullPath))
-
-
-      // await new Promise((resolve, reject) => {
-      //   uploadTask.on(
-      //     'state_changed',
-      //     null,
-      //     (error) => {
-      //       console.error('Upload error:', error);
-      //       reject(error);
-      //     },
-      //     async () => {
-      //       mediaUrl = await getDownloadURL(uploadTask.snapshot.ref);
-      //       resolve();
-      //     }
-      //   );
-      // });
-
-
     }
 
     const formDataToSend = {
