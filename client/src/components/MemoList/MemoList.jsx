@@ -8,7 +8,7 @@ const MemoList = ({memories}) =>{
   }
 	return (
 		<>
-		<p className='my-list-text'>This is My memory list</p>
+		
 		<div className='memo_list_container'>
 			
 			<div className='list_scroll'>

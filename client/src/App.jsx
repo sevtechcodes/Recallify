@@ -6,8 +6,6 @@ import Add from './components/Memo/Add';
 import { getAllMemories, createMemory } from './service';
 
 const App = () => {
-
-
   const [memories, setMemories] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [formData, setFormData] = useState({
@@ -49,28 +47,23 @@ const App = () => {
     return memories.sort((a, b) => new Date(a.date) - new Date(b.date));
   };
 
-
-
-
   return (
     <div className="app-container">
-      <Navbar />
+      <Navbar setIsFormVisible={setIsFormVisible} />
       <div className='first-section'>
         <MemoList memories={memories} />
-
-				<div className='sticky-container'>
-					 <button className='create-button' onClick={() => setIsFormVisible(true)}>+ Create New</button>
-				</div>
+        {/* <div className='sticky-container'>
+          <button className='create-button' onClick={() => setIsFormVisible(true)}>+ Create New</button>
+        </div> */}
       </div>
 
       {isFormVisible && (
         <Add 
-				formData={formData} 
-				onChange={handleInputChange} 
-				onSave={handleSave} 
-				setIsFormVisible={setIsFormVisible}
-				
-				/>
+          formData={formData} 
+          onChange={handleInputChange} 
+          onSave={handleSave} 
+          setIsFormVisible={setIsFormVisible}
+        />
       )}
     </div>
   );

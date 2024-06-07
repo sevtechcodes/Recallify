@@ -1,18 +1,14 @@
-import "./NavbarStyle.css"
-import search from '../../assets/search.svg';
+import "./NavbarStyle.css";
+// import search from '../../assets/search.svg';
+import myLogo from '../../assets/logo.png';
 
-const Navbar = () => (
-	<div className="navbar">
-		<div className="navbar_logo">
-			<p className="navbar_logo">Recallify</p>
-		</div>
-    {/* <div className="navbar_search">
-      <img className="navbar_search_icon" src={search} alt="search icon"/>
-      Search
-    </div> */}
-		
-	</div>
-	
+const Navbar = ({ setIsFormVisible }) => (
+  <div className="navbar">
+    <img className="logo" src={myLogo} alt="logo" />
+    <p className='my-memories-text'> My memories</p>
+    <button className="stick-create-button" onClick={() => setIsFormVisible(true)}>+ Create New</button>
+  </div>
 );
 
 export default Navbar;
+

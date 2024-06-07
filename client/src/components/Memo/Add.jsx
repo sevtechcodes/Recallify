@@ -68,7 +68,7 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
   return (
     <div className="add-container">
       <form onSubmit={handleSubmit}>
-        <h2>Create a new event</h2>
+        <h2>Create a new Memory</h2>
 
         <input
           type="text"

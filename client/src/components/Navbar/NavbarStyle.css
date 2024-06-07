@@ -2,31 +2,35 @@
   position: fixed;
   z-index: 10;
   top: 0;
-  height: 9vh;
+	box-sizing: border-box;
   width: 100vw;
-  background: rgb(1, 27, 7);
-  padding: 0 7.5vh;
+  background: black;
+  /* padding: 0 5vh; */
   display: flex;
-  justify-content: space-between;
-  box-sizing: border-box;
+	align-items: center;
+	gap: 25%;
 
 }
 
-.navbar_logo {
-  height: 100%;
+.logo{
+	width: 12%;
+	padding-bottom: 35px;
+	padding-left: 20px;
+}
+
+.my-memories-text{
 	color: whitesmoke;
-	font-size: xx-large;
-	margin: 0px;
-	padding: 5px;
+	font-size: 2.5em;
+	font-weight: 900;
 }
 
-/* .navbar_search{
-  height: 100%;
-  display: flex;
-  align-items: center;
+.stick-create-button{
+	background-color: rgba(95, 208, 78);
+	width: 135px;
+	height: 66px;
+	padding: 10px 20px;
+	font-size: 20px;
+	border-radius: 12px;
+	border: none;
+	cursor: pointer;
 }
-
-.navbar_search_icon {
-  height: 32%;
-  margin-right: 10px;
-} */
