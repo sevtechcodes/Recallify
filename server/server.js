@@ -4,7 +4,7 @@ const path = require('path');
 require('dotenv').config();
 const router = require('./router');
 const connectDB = require('./models/db');
-const { PORT } = require('./config')
+const PORT = 3000;
 
 const app = express();
 

@@ -8,11 +8,11 @@ const MemoList = ({memories}) =>{
   }
 	return (
 		<div className='memo_list_container'>
-			<p>This is My memory list</p>
+			<p className='my-list-text'>This is My memory list</p>
 			<div className='list_scroll'>
 				<ul>
 					{memories.map(memory => (
-						<li key={memory._id}> 
+						<li key={memory._id} className='item'> 
 							<a>Edit</a> { /*edit will take us to the DetailView page. Maybe like <Link to={`/edit/${memory._id}`}>Edit</Link> */}
 							<h1>{memory.title}</h1>
 							<img src={memory.media} alt="Media" className="detail-image"></img>

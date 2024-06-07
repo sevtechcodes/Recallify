@@ -1,18 +1,42 @@
 .memo_list_container{
-	background-color: antiquewhite;
-	margin-top: 50px;
-	font-size: 1em;
-	font-weight: 500;
-	margin-bottom: 50px;
-	padding-left: 5vw;
+display: flex column;
+	border: 1px;
+	border-radius: 2%;
+	background-color: rgb(203, 236, 187);
+	margin-bottom: 10px;
+}
+
+.my-list-text{
+ text-align: center;
+ font-size: 3.2em;
+ font-weight: 900;
+ margin: 5px;
 }
 
 .list_scroll{
   display: flex;
   flex-wrap: nowrap;
-  width: 800px;
-  height: 500px;
+  height: 700px;
   overflow: auto;
 
 }
+
+ul {
+	list-style: none; /* Removes bullet points */
+	padding: 0; /* Optional: removes default padding */
+}
+
+.item{
+	border: 1px solid black;
+	border-radius: 3%;
+	padding: 20px;
+	margin: 20px; 
+}
+
+.my-list-text{
+	align-items: center;
+}
+
+
+
 

@@ -1,0 +1,63 @@
+/* src/components/MemoryForm.css */
+.memory-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.memory-form h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.memory-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.memory-form input,
+.memory-form textarea,
+.memory-form select {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.memory-form input[type="file"] {
+  padding: 0;
+}
+
+.memory-form button[type="submit"] {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #4caf50;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.memory-form button[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.memory-form .record-button {
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.memory-form .record-button.green {
+  background-color: #4caf50;
+}
+
+.memory-form .record-button.red {
+  background-color: #f44336;
+}

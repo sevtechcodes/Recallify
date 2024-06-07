@@ -1,8 +1,11 @@
 import React, { useState, useRef } from 'react';
 import Webcam from 'react-webcam';
 import './style.css';
+import { storage } from '../../firebase';
+import { ref, getDownloadURL, uploadBytes } from "firebase/storage";
 
 const Add = ({ formData, onChange, onSave }) => {
+  const [imgUrl, setImgUrl] = useState(null);
   const { title, description, child, location, date, category } = formData;
   const [mediaFile, setMediaFile] = useState(null); // State to store the selected media file
   const [showCamera, setShowCamera] = useState(false); // State to show/hide camera
@@ -10,21 +13,40 @@ const Add = ({ formData, onChange, onSave }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Media', mediaFile);
 
-    const formDataToSend = new FormData();
-    formDataToSend.append('title', title);
-    formDataToSend.append('description', description);
-    formDataToSend.append('child', child);
-    formDataToSend.append('location', location);
-    formDataToSend.append('date', date);
-    formDataToSend.append('category', category);
+    let mediaUrl = '';
+
     if (mediaFile) {
-      formDataToSend.append('media', mediaFile); // Append the media file to the form data
+      const storageRef = ref(storage, `files/${mediaFile.name}`);
+      const uploadTask = await uploadBytes(storageRef, mediaFile);
+			mediaUrl = await getDownloadURL(ref(storage, uploadTask.metadata.fullPath))
+
+
+      // await new Promise((resolve, reject) => {
+      //   uploadTask.on(
+      //     'state_changed',
+      //     null,
+      //     (error) => {
+      //       console.error('Upload error:', error);
+      //       reject(error);
+      //     },
+      //     async () => {
+      //       mediaUrl = await getDownloadURL(uploadTask.snapshot.ref);
+      //       resolve();
+      //     }
+      //   );
+      // });
+
+
     }
 
+    const formDataToSend = {
+      ...formData,
+      media: mediaUrl,
+    };
+
     try {
-      await onSave(formDataToSend); // Pass the FormData object to the onSave function
+      await onSave(formDataToSend); // Pass the formData object to the onSave function
       onChange('title', '');
       setMediaFile(null);
       onChange('description', '');
@@ -37,26 +59,26 @@ const Add = ({ formData, onChange, onSave }) => {
     }
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setMediaFile(file);
-  };
-
   const handleTakePicture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
     fetch(imageSrc)
-      .then(res => res.blob())
-      .then(blob => {
+      .then((res) => res.blob())
+      .then((blob) => {
         const file = new File([blob], 'captured_image.png', { type: 'image/png' });
         setMediaFile(file);
         setShowCamera(false);
       });
   };
 
+	const onCancel =()=>{
+		onSave(null)
+	};
+
   return (
     <div className="add-container">
       <form onSubmit={handleSubmit}>
         <h2>Create a new event</h2>
+
         <input
           type="text"
           className="add-title"
@@ -64,42 +86,40 @@ const Add = ({ formData, onChange, onSave }) => {
           value={title}
           onChange={(e) => onChange('title', e.target.value)}
         />
-        <div className="add-media-description">
-          <div className="add-media">
-            <p>Add Media</p>
-            <div className="media-icon upload-media">
-              📎
-              <input
-                type="file"
-                accept="image/*,video/*"
-                onChange={handleFileChange}
-                style={{ display: 'none' }}
-                id="file-upload"
-              />
-              <label htmlFor="file-upload" style={{ cursor: 'pointer' }}>Upload Media</label>
-            </div>
-            <div className="media-icon camera" onClick={() => setShowCamera(true)}>
-              Take Pic📷
-            </div>
+
+        <textarea
+          className="add-description"
+          placeholder="Type description"
+          value={description}
+          onChange={(e) => onChange('description', e.target.value)}
+        ></textarea>
+
+        <div className="add-media">
+          <div className="file-input-wrapper">
+            <input
+              type="file"
+              id="fileInput"
+              name="fileInput"
+              onChange={(e) => setMediaFile(e.target.files[0])}
+            />
+          </div>
+
+          <div className="media-icon camera" onClick={() => setShowCamera(true)}>
+            📷
           </div>
           {showCamera && (
             <div className="camera-container">
-              <Webcam
-                audio={false}
-                ref={webcamRef}
-                screenshotFormat="image/png"
-              />
-              <button type="button" onClick={handleTakePicture}>Take Picture</button>
-              <button type="button" onClick={() => setShowCamera(false)}>Cancel</button>
+              <Webcam audio={false} ref={webcamRef} screenshotFormat="image/png" />
+              <button type="button" onClick={handleTakePicture}>
+                Take Picture
+              </button>
+              <button type="button" onClick={() => setShowCamera(false)}>
+                Cancel
+              </button>
             </div>
           )}
-          <textarea
-            className="add-description"
-            placeholder="Type description"
-            value={description}
-            onChange={(e) => onChange('description', e.target.value)}
-          ></textarea>
         </div>
+
         <div className="add-details">
           <div>
             <label>Child: </label>
@@ -135,11 +155,7 @@ const Add = ({ formData, onChange, onSave }) => {
           </div>
         </div>
         <div className="add-actions">
-          <button
-            type="button"
-            className="cancel-button"
-            onClick={() => onSave(null)}
-          >
+          <button type="button" className="cancel-button" onClick={() => oncancel()}>
             Cancel
           </button>
           <button className="save-button" type="submit">

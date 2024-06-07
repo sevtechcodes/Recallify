@@ -1,15 +1,39 @@
+body{
+	margin: 0;
+	display: flex;
+	place-items: center;
+	min-width: 320px;
+	min-height: 100vh;
+}
+
 .app-container{
 	display: flex;
 	align-items: center;
+	box-sizing: border-box;
+
 }
 
 .first-section{
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	align-items: center;
+	/* width: 100vw; */
+
+}
+
+.sticky-container {
+	box-shadow: 0 -2px 5px rgba(0,0,0,0.2); /* Optional: shadow for better visibility */
+}
+.sticky-container button {
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
 }
 
 .create-button{
+	display: flex;
+	align-items:end;
 	background-color: green;
 	width: 400px;
 }
