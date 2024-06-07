@@ -2,10 +2,10 @@ import React, { useState, useRef } from 'react';
 import Webcam from 'react-webcam';
 import './style.css';
 import { storage } from '../../firebase';
-import { ref, getDownloadURL, uploadBytes } from '../../firebase/storage';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+
 
 const Add = ({ formData, onChange, onSave }) => {
-  // const [imgUrl, setImgUrl] = useState(null);
   const { title, description, child, location, date, category } = formData;
   const [mediaFile, setMediaFile] = useState(null); // State to store the selected media file
   const [showCamera, setShowCamera] = useState(false); // State to show/hide camera
