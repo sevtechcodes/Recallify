@@ -2,7 +2,8 @@
 display: flex column;
 	border: 1px;
 	border-radius: 2%;
-	background-color: rgb(203, 236, 187);
+	/* background-color: rgb(203, 236, 187); */
+	background-color: rgb(180 204 166 / 40%);
 	margin-bottom: 10px;
 }
 
@@ -11,14 +12,32 @@ display: flex column;
  font-size: 3.2em;
  font-weight: 900;
  margin: 5px;
+
 }
 
 .list_scroll{
   display: flex;
-  flex-wrap: nowrap;
+	flex-direction: column;
+  flex-wrap: wrap;
+	align-content: flex-start;
   height: 700px;
   overflow: auto;
 
+}
+
+p.description{
+	font-size: larger;
+	padding: 20px;
+	margin: 0px;
+	border-radius: 5px;
+	height: 120px;
+	width:  500px;
+	border: solid 1px;
+}
+
+.media-notes{
+	/* padding: 20px */
+	font-size: 12px;
 }
 
 .edit-link{
@@ -30,14 +49,24 @@ display: flex column;
 .memory-details{
 	display:flex;
 	flex-direction: row;
+	gap: 150px;
 
 }
 
-.description{
-	height: 100px;
-	background-color: yellow;
-	border: solid 1 px;
+.detail-info{
+	height: 250px;
+	width: 500px;
+	border-radius: 15px;
+	padding: 20px;
+	
 }
+.media{
+
+	height: 250px;
+	width: 300px;
+	border-radius: 10px;
+}
+
 
 .media-info{
 	height: 200px;
@@ -50,10 +79,11 @@ ul {
 }
 
 .item{
-	border: 1px solid black;
 	border-radius: 3%;
 	padding: 20px;
 	margin: 20px; 
+	border: 1px solid #ccc;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); /* Adds shadow to the div */
 }
 
 .my-list-text{

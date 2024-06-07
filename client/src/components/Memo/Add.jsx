@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import Webcam from 'react-webcam';
-import './style.css';
+import './addStyle.css';
 import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 

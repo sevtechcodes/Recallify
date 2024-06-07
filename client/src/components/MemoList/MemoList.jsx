@@ -7,10 +7,12 @@ const MemoList = ({memories}) =>{
     return <div>No memories yet</div>;
   }
 	return (
+		<>
+		<p className='my-list-text'>This is My memory list</p>
 		<div className='memo_list_container'>
-			<p className='my-list-text'>This is My memory list</p>
+			
 			<div className='list_scroll'>
-				<ul>
+				<ul className='item-list'>
 					{memories.map(memory => (
 						<li key={memory._id} className='item'> 
 							<div className='edit-link'>
@@ -20,16 +22,24 @@ const MemoList = ({memories}) =>{
 
 						<div className='memory-details'>
 								<div className='media-info'>
-									<img src={memory.media} alt="Media" className="detail-image"></img>
+									<img className="media" src={memory.media} alt="Media"></img>
+
 								</div>
+
 						
 								<div className="detail-info">
-									<p className='description'>{memory.description}</p>
-									<div>Person: {memory.child}</div>
-									<div>Location: {memory.location}</div>
-									<div>Date: {memory.date}</div>
-									<div>Category: {memory.category}</div>
+									<div className='description-area'>
+										<p className='description'>{memory.description}</p>
+									</div>
+									
+									<div className='media-notes'> 
+										<div>Person: {memory.child}</div>
+										<div>Location: {memory.location}</div>
+										<div>Date: {memory.date}</div>
+										<div>Category: {memory.category}</div>
+									</div>
 								</div>
+
 							</div>
 						</li>
 					))}
@@ -37,6 +47,7 @@ const MemoList = ({memories}) =>{
 			</div>
 
 		</div>
+	</>
 	);
 
 };

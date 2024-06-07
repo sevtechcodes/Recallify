@@ -18,6 +18,8 @@ body{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	padding: 0 7.5vh;
+	margin-top: 90px;
 	/* width: 100vw; */
 
 }

@@ -22,17 +22,19 @@ const MemoryList = () => {
       <h1>Memory List</h1>
       <ul>
         {memories.map((memory) => (
-          <li key={memory.id} onClick={() => setSelectedMemory(memory)}>
-            <img src={memory.mediaURL} alt="Memory" />
-            <div>
-              <h3>{memory.title}</h3>
-              <p>{memory.description}</p>
-              <p>Child: {memory.child}</p>
-              <p>Location: {memory.location}</p>
-              <p>Date: {new Date(memory.date.seconds * 1000).toLocaleDateString()}</p>
-              <p>Category: {memory.category}</p>
-            </div>
-          </li>
+					<div className='list-item'>
+							<li key={memory.id} onClick={() => setSelectedMemory(memory)}>
+								<img src={memory.mediaURL} alt="Memory" />
+								<div>
+									<h3>{memory.title}</h3>
+									<p>{memory.description}</p>
+									<p>Child: {memory.child}</p>
+									<p>Location: {memory.location}</p>
+									<p>Date: {new Date(memory.date.seconds * 1000).toLocaleDateString()}</p>
+									<p>Category: {memory.category}</p>
+								</div>
+							</li>
+					</div>
         ))}
       </ul>
       {selectedMemory && (
