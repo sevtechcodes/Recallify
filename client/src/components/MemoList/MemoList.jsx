@@ -16,7 +16,8 @@ const MemoList = ({memories}) =>{
 					{memories.map(memory => (
 						<li key={memory._id} className='item'> 
 							<div className='edit-link'>
-								<a >Edit</a> { /*edit will take us to the DetailView page. Maybe like <Link to={`/edit/${memory._id}`}>Edit</Link> */}
+								{/* <a >Edit</a>  */}
+								TODO { /*edit will take us to the DetailView page. Maybe like <Link to={`/edit/${memory._id}`}>Edit</Link> */}
 							</div>
 							<h1>{memory.title}</h1>
 

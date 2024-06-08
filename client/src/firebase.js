@@ -12,6 +12,8 @@ import { getStorage } from "firebase/storage";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
 	// apiKey: import.meta.env.VITE_FIREBASE_API_KEY, //the format if you want to hide in env file.
+	//Check this lik
+	//https://vitejs.dev/guide/env-and-mode.html#env-variables-and-modes
 
 };
 
