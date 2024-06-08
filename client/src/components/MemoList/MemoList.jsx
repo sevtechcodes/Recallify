@@ -6,6 +6,8 @@ const MemoList = ({memories}) =>{
 	if (memories.length === 0) {
     return <div>No memories yet</div>;
   }
+
+	
 	return (
 		<>
 		
@@ -21,9 +23,19 @@ const MemoList = ({memories}) =>{
 							</div>
 							<h1>{memory.title}</h1>
 
-						<div className='memory-details'>
-								<div className='media-info'>
-									<img className="media" src={memory.media} alt="Media"></img>
+								<div className='memory-details'>
+										<div className='media-info'>
+
+									{console.log("check Media:", memory.media)}
+										{console.log("Check MediaType:", memory.mediaType)}
+
+
+										{/* This works displays videos */}
+											(		<video controls width="400px">
+														<source src={memory.media} type="video/mp4" />
+													</video>
+											)
+
 
 								</div>
 

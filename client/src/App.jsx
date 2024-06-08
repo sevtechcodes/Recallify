@@ -11,6 +11,7 @@ const App = () => {
   const [formData, setFormData] = useState({
     title: '',
     media: '',
+		mediaType: '',
     description: '',
     child: '',
     location: '',
