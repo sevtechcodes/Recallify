@@ -60,14 +60,22 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
 		onChange('child', '');
 		onChange('location', '');
 		onChange('date', '');
-		// onChange('category', '');
 		onChange('category', '');
 		// setIsFormVisible(false); // Close the form
 	};
 
 	const onClose = () =>{
 		setIsFormVisible(false); // Close the form
-	}
+	};
+
+	const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    
+    return `${day}.${month}.${year}`;
+};
 
   return (
     <div className="add-container">
@@ -144,8 +152,7 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
 							<label>Date: </label>
 							<input
 								type="date"
-								value={date}
-								onChange={(e) => onChange('date', e.target.value)}
+								onChange={(e) => onChange('date', formatDate(e.target.value))}
 							/>
 						</div>
 						<div>

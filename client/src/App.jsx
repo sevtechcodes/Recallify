@@ -47,6 +47,8 @@ const App = () => {
     return memories.sort((a, b) => new Date(a.date) - new Date(b.date));
   };
 
+// console.log('API key',import.meta.env.VITE_FIREBASE_API_KEY);
+
   return (
     <div className="app-container">
       <Navbar setIsFormVisible={setIsFormVisible} />

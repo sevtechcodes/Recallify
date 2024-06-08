@@ -17,6 +17,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
+// TODO  moved the env file here to protect it. Create a controller to serve this info to the frontend
+// console.log('api key', process.env.VITE_FIREBASE_API_KEY)
+
 // Set up static file serving
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 

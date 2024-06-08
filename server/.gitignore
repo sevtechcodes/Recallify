@@ -1,0 +1,5 @@
+# Ignore service account key JSON file
+serviceAccountKey.json
+
+# Ignore environment variables file
+.env
