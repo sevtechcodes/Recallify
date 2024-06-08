@@ -11,7 +11,7 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
   const [previewUrl, setPreviewUrl] = useState('');
   const [progress, setProgress] = useState(0);
   const [showCamera, setShowCamera] = useState(false);
-  const [mediaType, setMediaType] = useState('');
+  const [mediaType, setMediaType] = useState(null);
   const webcamRef = useRef(null);
 
   const handleSubmit = async (e) => {
@@ -106,9 +106,9 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
     setIsFormVisible(false);
   };
 
-  const onClose = () => {
-    setIsFormVisible(false);
-  };
+  // const onClose = () => {
+  //   setIsFormVisible(false);
+  // };
 
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -122,9 +122,60 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
   return (
     <div className="add-container">
       <div className='modal'>
-        <button className='close-form-button' type="button" onClick={onClose}>X</button>
+        {/* <button className='close-form-button' type="button" onClick={onClose}>X</button> */}
         <h2>Create a new Memory</h2>
         <form onSubmit={handleSubmit}>
+					<div className="add-actions">
+            <button type="button" className="cancel-button" onClick={onCancel}>
+              Cancel
+            </button>
+            <button className="save-button" type="submit">
+              SAVE
+            </button>
+          </div>
+
+
+					<div className="add-details">
+            <div>
+              <label>Person: </label>
+              <select value={child} onChange={(e) => onChange('child', e.target.value)}>
+                <option value="">Select Person</option>
+                <option value="Theo">Theo</option>
+                <option value="Sevim">Sevim</option>
+              </select>
+            </div>
+            <div>
+              <label>Location: </label>
+              <select value={location} onChange={(e) => onChange('location', e.target.value)}>
+                <option value="">Select Location</option>
+                <option value="Berlin">Berlin</option>
+                <option value="Istanbul">Istanbul</option>
+                <option value="Mumbai">Mumbai</option>
+                <option value="Other">Other</option>
+              </select>
+							</div>
+            <div>
+              <label>Date: </label>
+              <input
+                type="date"
+                onChange={(e) => onChange('date', formatDate(e.target.value))}
+              />
+            </div>
+            <div>
+              <label>Category: </label>
+              <select value={category} onChange={(e) => onChange('category', e.target.value)}>
+                <option value="">Select Category</option>
+                <option value="birthday">Birthday</option>
+								<option value="play">Play Time</option>
+                <option value="travel">Travel</option>
+                <option value="general">General</option>
+                <option value="occasions">Occasions</option>
+                <option value="friends">Friends</option>
+              </select>
+            </div>
+          </div>
+
+
           <input
             type="text"
             className="add-title"
@@ -162,7 +213,7 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
                 {mediaType === 'image' ? (
                   <img src={previewUrl} alt="Preview" />
                 ) : mediaType === 'video' ? (
-                  <video controls width="400px">
+                  <video controls width="100px">
                     <source src={previewUrl} type={mediaFile.type} />
                   </video>
                 ) : null}
@@ -173,7 +224,7 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
             </div>
             {showCamera && (
               <div className="camera-container">
-                <Webcam audio={false} ref={webcamRef} screenshotFormat="image/png" />
+                <Webcam className="camera-click" audio={false} ref={webcamRef} screenshotFormat="image/png" />
                 <button type="button" onClick={handleTakePicture}>
                   Take Picture
                 </button>
@@ -183,55 +234,8 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
               </div>
             )}
           </div>
-          <div className="add-details">
-            <div>
-              <label>Person: </label>
-              <select value={child} onChange={(e) => onChange('child', e.target.value)}>
-                <option value="">Select Person</option>
-                <option value="Theo">Theo</option>
-                <option value="Sevim">Sevim</option>
-              </select>
-            </div>
-            <div>
-              <label>Location: </label>
-              <select value={location} onChange={(e) => onChange('location', e.target.value)}>
-                <option value="">Select Location</option>
-                <option value="Berlin">Berlin</option>
-                <option value="Istanbul">Istanbul</option>
-                <option value="Mumbai">Mumbai</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div>
-              <label>Date: </label>
-              <input
-                type="date"
-                onChange={(e) => onChange('date', formatDate(e.target.value))}
-              />
-            </div>
-            <div>
-              <label>Category: </label>
-              <select value={category} onChange={(e) => onChange('category', e.target.value)}>
-                <option value="">Select Category</option>
-                <option value="birthday">Birthday</option>
-                <option value="travel">Travel</option>
-                <option value="general">General</option>
-                <option value="occasions">Occasions</option>
-                <option value="friends">Friends</option>
-              </select>
-            </div>
-          </div>
-          <div className="add-actions">
-            <button type="button" className="delete-button">
-              Delete
-            </button>
-            <button type="button" className="cancel-button" onClick={onCancel}>
-              Cancel
-            </button>
-            <button className="save-button" type="submit">
-              SAVE
-            </button>
-          </div>
+          
+          
         </form>
       </div>
     </div>

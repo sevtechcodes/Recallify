@@ -6,12 +6,15 @@ import Add from './components/Memo/Add';
 import { getAllMemories, createMemory } from './service';
 
 const App = () => {
+  // State for memories
   const [memories, setMemories] = useState([]);
+
+  // State for form visibility and form data
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     media: '',
-		mediaType: '',
+    mediaType: '',
     description: '',
     child: '',
     location: '',
@@ -19,14 +22,17 @@ const App = () => {
     category: '',
   });
 
+  // Fetch memories on component mount
   useEffect(() => {
     const fetchMemories = async () => {
       const memories = await getAllMemories();
-      setMemories(memories);
+      const sortedMemories = sortMemories(memories);
+      setMemories(sortedMemories);
     };
     fetchMemories();
   }, []);
 
+  // Function to handle saving a new memory
   const handleSave = async (newMemoryData) => {
     try {
       const newMemory = await createMemory(newMemoryData);
@@ -37,6 +43,7 @@ const App = () => {
     }
   };
 
+  // Function to handle input change in the form
   const handleInputChange = (field, value) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -44,30 +51,32 @@ const App = () => {
     }));
   };
 
+  // Helper function to sort memories by date
   const sortMemories = (memories) => {
     return memories.sort((a, b) => new Date(a.date) - new Date(b.date));
   };
 
-// console.log('API key',import.meta.env.VITE_FIREBASE_API_KEY);
-
   return (
     <div className="app-container">
+      {/* Navbar component */}
       <Navbar setIsFormVisible={setIsFormVisible} />
-      <div className='first-section'>
-        <MemoList memories={memories} />
-        {/* <div className='sticky-container'>
-          <button className='create-button' onClick={() => setIsFormVisible(true)}>+ Create New</button>
-        </div> */}
-      </div>
 
-      {isFormVisible && (
-        <Add className="create-form"
-          formData={formData} 
-          onChange={handleInputChange} 
-          onSave={handleSave} 
-          setIsFormVisible={setIsFormVisible}
-        />
-      )}
+      {/* Main section containing MemoList and Add form */}
+      <div className='main-section'>
+        {/* MemoList component */}
+        <MemoList memories={memories} />
+
+        {/* Add form component */}
+        {isFormVisible && (
+          <Add
+            className="create-form"
+            formData={formData} 
+            onChange={handleInputChange} 
+            onSave={handleSave} 
+            setIsFormVisible={setIsFormVisible}
+          />
+        )}
+      </div>
     </div>
   );
 };

@@ -75,13 +75,10 @@ h1{
   margin-bottom: 10px;
 }
 
-.add-actions,
-.detail-actions {
+.add-actions {
   display: flex;
-  justify-content: center;
-	align-items: baseline;
-
-margin-top: 85px;
+  justify-content: end;	
+	margin-bottom: 20px;
 }
 
 .cancel-button,
@@ -163,11 +160,6 @@ margin-top: 85px;
 	
 }
 
-/* .add-container, .detail-view-container{
-	background-color: #a6ef9c38;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
-  z-index: 1001;
-} */
 .progress-container {
   display: flex;
   align-items: center;
@@ -189,7 +181,13 @@ margin-top: 85px;
 
 .media-preview img,
 .media-preview video {
-  max-width: 100%;
+  max-width: 100px;
+  height: auto;
+  margin-top: 10px;
+}
+
+.camera-click{
+	max-width: 215px;
   height: auto;
   margin-top: 10px;
 }

@@ -29,12 +29,17 @@ const MemoList = ({memories}) =>{
 									{console.log("check Media:", memory.media)}
 										{console.log("Check MediaType:", memory.mediaType)}
 
-
-										{/* This works displays videos */}
-											(		<video controls width="400px">
-														<source src={memory.media} type="video/mp4" />
+											{/* This works displays videos */} 
+											<video className='list-video-item' controls width="300px"> <source src={memory.media} type="video/mp4" /> </video> 
+											{/* <div className="media-preview">
+												{mediaType === 'image' && <img src={url} alt="Preview" />}
+												{mediaType === 'video' && (
+													<video controls width="400px">
+														<source src={url} type="video/mp4" />
+														Your browser does not support the video tag.
 													</video>
-											)
+												)}
+											</div> */}
 
 
 								</div>
