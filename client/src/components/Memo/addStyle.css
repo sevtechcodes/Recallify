@@ -7,7 +7,11 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   background-color: #fff;
 }
+form{
+	display: flex;
+	flex-direction:column;
 
+}
 .add-title,
 .add-description {
   width: 100%;
@@ -71,21 +75,21 @@ h1{
   border: none;
   border-radius: 4px;
   cursor: pointer;
+	background-color:#f0f0f0;;
+	color:black;
 }
 
-.cancel-button {
-  background-color: #f0f0f0;
+
+.delete-button:hover {
+	background-color: #e23434;
+} 
+
+.cancel-button:hover {
+	background-color: #5a6268;
 }
 
-.save-button,
-.edit-button {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.delete-button {
-  background-color: #dc3545;
-  color: #fff;
+.save-button:hover {
+	background-color: rgb(41, 176, 36);
 }
 
 .detail-image {
@@ -98,4 +102,48 @@ h1{
 .file-input-wrapper {
   position: relative;
   display: inline-block;
+}
+
+.close-form-button{
+	height: 35px;
+  width: 35px;
+  border: solid 2px red;
+	font-size: 16px;
+	font-weight: 700;
+  border-radius: 50%;
+	background-color: transparent;
+	cursor: pointer;
+	align-self: flex-end;
+}
+
+
+.add-container{
+
+	  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+
+}
+
+.modal{
+	background: white;
+  padding: 20px;
+  border-radius: 5px;
+	width: 500px;
+	height: 500px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  z-index: 1001;
+}
+
+.add-container, .detail-view-container{
+	background-color: #a6ef9c38;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+  z-index: 1001;
 }

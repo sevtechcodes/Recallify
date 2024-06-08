@@ -39,3 +39,8 @@ body{
 	border: none;
 	cursor: pointer;
 }
+
+.create-form{
+	z-index: 20;
+	position: relative;
+}

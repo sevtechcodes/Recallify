@@ -58,7 +58,7 @@ const App = () => {
       </div>
 
       {isFormVisible && (
-        <Add 
+        <Add className="create-form"
           formData={formData} 
           onChange={handleInputChange} 
           onSave={handleSave} 
