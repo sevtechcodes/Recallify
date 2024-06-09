@@ -3,6 +3,7 @@ import Webcam from 'react-webcam';
 import './addStyle.css';
 import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import WebSpeechAPIDemo from 	'../VTT/WebSpeechAPIDemo'
 
 const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
   const { title, description, child, location, date, category } = formData;
@@ -191,6 +192,7 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
               onChange={(e) => onChange('description', e.target.value)}
             ></textarea>
             <button className='listen-button' type="button">Listen</button>
+						{/* <WebSpeechAPIDemo></WebSpeechAPIDemo> */}
           </div>
           <div className="add-media">
             <div className="file-input-wrapper">
@@ -209,7 +211,10 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
               </div>
             )}
             {previewUrl && (
+							
               <div className="media-preview">
+								{console.log("Get me previewUrl", previewUrl)}
+								{console.log("Get me previewUrl", previewUrl.mediaType)}
                 {mediaType === 'image' ? (
                   <img src={previewUrl} alt="Preview" />
                 ) : mediaType === 'video' ? (

@@ -4,6 +4,8 @@ import Navbar from './components/Navbar/Navbar';
 import MemoList from './components/MemoList/MemoList';
 import Add from './components/Memo/Add';
 import { getAllMemories, createMemory } from './service';
+import WebSpeechAPIDemo from './components/VTT/WebSpeechAPIDemo'
+
 
 const App = () => {
   // State for memories
@@ -61,10 +63,13 @@ const App = () => {
       {/* Navbar component */}
       <Navbar setIsFormVisible={setIsFormVisible} />
 
+		
+
       {/* Main section containing MemoList and Add form */}
       <div className='main-section'>
         {/* MemoList component */}
         <MemoList memories={memories} />
+				<WebSpeechAPIDemo> </WebSpeechAPIDemo>
 
         {/* Add form component */}
         {isFormVisible && (
