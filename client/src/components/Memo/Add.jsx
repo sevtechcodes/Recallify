@@ -25,6 +25,7 @@ const Add = ({
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      let formDataToSend = { ...formData };
       if (mediaFile) {
         const storageRef = ref(storage, `files/${mediaFile.name}`);
         const uploadTask = uploadBytesResumable(storageRef, mediaFile);
@@ -40,11 +41,10 @@ const Add = ({
           async () => {
             try {
               const mediaUrl = await getDownloadURL(uploadTask.snapshot.ref);
-              setMediaUrl(mediaUrl);
-              const mediaType = mediaFile.type.startsWith('image/') ? 'image' : mediaFile.type.startsWith('video/') ? 'video' : '';
+              const mediaType = mediaFile.type.startsWith('image/') ? 'image' : 'video';
 
-              const formDataToSend = {
-                ...formData,
+              formDataToSend = {
+                ...formDataToSend,
                 media: mediaUrl,
                 mediaType: mediaType,
               };
@@ -57,7 +57,6 @@ const Add = ({
           }
         );
       } else {
-        const formDataToSend = { ...formData };
         await onSave(formDataToSend);
         clearForm();
       }
@@ -94,12 +93,12 @@ const Add = ({
     if (file) {
       setMediaFile(file);
       setPreviewUrl(URL.createObjectURL(file));
-      const type = file.type.startsWith('image/') ? 'image' : file.type.startsWith('video/') ? 'video' : '';
+      const type = file.type.startsWith('image/') ? 'image' : 'video';
       setMediaType(type);
     }
   };
 
-  const onCancel = () => {
+  const   onCancel = () => {
     clearForm();
   };
 
@@ -170,7 +169,7 @@ const Add = ({
             value={title}
             onChange={(e) => onChange('title', e.target.value)}
           />
-          <WebSpeechAPIDemo value={description} onChange={onChange} />
+          <WebSpeechAPIDemo value={description} onChange={(value) => onChange('description', value)} />
           <div className="add-media">
             <div className="file-input-wrapper">
               <div className="media-icon camera" onClick={() => setShowCamera(true)}>
@@ -220,3 +219,4 @@ const Add = ({
 };
 
 export default Add;
+

@@ -5,7 +5,7 @@ const MemorySchema = new mongoose.Schema({
 	title: {type: String},
 	media: {type: String
 	},
-	// mediaType:{ type: String},
+	mediaType:{ type: String},
 
 	description: {type: String},
 	child: {type: String},

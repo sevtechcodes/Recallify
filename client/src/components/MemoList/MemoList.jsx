@@ -18,7 +18,7 @@ const MemoList = ({ memories, handleEditMemory }) => {
 
               <div className="memory-details">
                 <div className="media-info">
-                  {memory.mediaType === 'video' && (
+                  {memory=== 'video' && (
                     <video className="list-video-item" controls width="300px">
                       <source src={memory.media} type="video/mp4" />
                     </video>

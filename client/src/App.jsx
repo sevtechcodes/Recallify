@@ -9,6 +9,7 @@ const App = () => {
   const [memories, setMemories] = useState([]);
   const [isFormVisible, setIsFormVisible] = useState(false);
   const [formData, setFormData] = useState({
+		
     title: '',
     media: '',
     mediaType: '',
@@ -88,7 +89,7 @@ const App = () => {
   const handleDelete = async (id) => {
     try {
       await deleteMemory(id);
-      setMemories((prevMemories) => prevMemories.filter((memory) => memory.id !== id));
+      setMemories((prevMemories) => prevMemories.filter((memory) => memory._id !== id));
       setSelectedMemory(null);
       setIsEditMode(false);
       setIsFormVisible(false);
