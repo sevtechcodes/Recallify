@@ -7,12 +7,12 @@ const {
 	createMemory,
   updateMemory,
   deleteMemory,
-	uploadMedia,
 } = require('./controller.js');
 
 
 
 router.get('/memories', getMemories);
+// router.get('/memories/:id', getmemory); //getting single memory
 router.post('/memories', createMemory);
 router.put('/memories/:id', updateMemory);
 router.delete('/memories/:id', deleteMemory);

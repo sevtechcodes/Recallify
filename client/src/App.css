@@ -5,13 +5,6 @@ body{
 
 }
 
-.app-container{
-	/* display: flex;
-	place-items: center;
-	min-width: 320px;
-	min-height: 100vh; */
-}
-
 .first-section{
 	display: flex;
 	flex-direction: column;

@@ -25,15 +25,25 @@ export const createMemory = async (memoryData) => {
   }
 };
 
-export const updateMemory = async (id, title, media, description, child, location, date, category) => {
+export const updateMemory = async (id, memoryData) => {
   try {
-    const response = await axios.put(`${apiUrl}/${id}`, { title, media, description, child, location, date, category });
+    const response = await axios.put(`${apiUrl}/${id}`, memoryData);
     return response.data;
   } catch (error) {
     console.error('Error updating item:', error);
     throw error;
   }
 };
+
+// export const updateMemory = async (id, title, media, description, child, location, date, category) => {
+//   try {
+//     const response = await axios.put(`${apiUrl}/${id}`, title, media, description, child, location, date, category );
+//     return response.data;
+//   } catch (error) {
+//     console.error('Error updating item:', error);
+//     throw error;
+//   }
+// };
 
 
 export const deleteMemory = async (id) => {

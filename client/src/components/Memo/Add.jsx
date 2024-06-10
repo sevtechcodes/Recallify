@@ -5,7 +5,14 @@ import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import WebSpeechAPIDemo from '../VTT/WebSpeechAPIDemo';
 
-const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
+const Add = ({ 
+  formData, 
+  onChange, 
+  onSave, 
+  setIsFormVisible, 
+  isEditMode, 
+  handleDelete 
+}) => {
   const { title, description, child, location, date, category } = formData;
   const [mediaFile, setMediaFile] = useState(null);
   const [mediaUrl, setMediaUrl] = useState('');
@@ -17,7 +24,6 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    let mediaUrl = '';
     try {
       if (mediaFile) {
         const storageRef = ref(storage, `files/${mediaFile.name}`);
@@ -33,14 +39,9 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
           },
           async () => {
             try {
-              mediaUrl = await getDownloadURL(uploadTask.snapshot.ref);
+              const mediaUrl = await getDownloadURL(uploadTask.snapshot.ref);
               setMediaUrl(mediaUrl);
-              let mediaType = '';
-              if (mediaFile.type.startsWith('image/')) {
-                mediaType = 'image';
-              } else if (mediaFile.type.startsWith('video/')) {
-                mediaType = 'video';
-              }
+              const mediaType = mediaFile.type.startsWith('image/') ? 'image' : mediaFile.type.startsWith('video/') ? 'video' : '';
 
               const formDataToSend = {
                 ...formData,
@@ -49,24 +50,33 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
               };
 
               await onSave(formDataToSend);
-              onChange('title', '');
-              setMediaFile(null);
-              setPreviewUrl('');
-              setProgress(0);
-              onChange('description', '');
-              onChange('child', '');
-              onChange('location', '');
-              onChange('date', '');
-              onChange('category', '');
+              clearForm();
             } catch (error) {
               console.error('Error getting download URL:', error);
             }
           }
         );
+      } else {
+        const formDataToSend = { ...formData };
+        await onSave(formDataToSend);
+        clearForm();
       }
     } catch (error) {
       console.error('Error uploading file:', error);
     }
+  };
+
+  const clearForm = () => {
+    onChange('title', '');
+    onChange('description', '');
+    onChange('child', '');
+    onChange('location', '');
+    onChange('date', '');
+    onChange('category', '');
+    setMediaFile(null);
+    setPreviewUrl('');
+    setProgress(0);
+    setIsFormVisible(false);
   };
 
   const handleTakePicture = async () => {
@@ -84,27 +94,13 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
     if (file) {
       setMediaFile(file);
       setPreviewUrl(URL.createObjectURL(file));
-      let type = '';
-      if (file.type.startsWith('image/')) {
-        type = 'image';
-      } else if (file.type.startsWith('video/')) {
-        type = 'video';
-      }
+      const type = file.type.startsWith('image/') ? 'image' : file.type.startsWith('video/') ? 'video' : '';
       setMediaType(type);
     }
   };
 
   const onCancel = () => {
-    onChange('title', '');
-    setMediaFile(null);
-    setPreviewUrl('');
-    setProgress(0);
-    onChange('description', '');
-    onChange('child', '');
-    onChange('location', '');
-    onChange('date', '');
-    onChange('category', '');
-    setIsFormVisible(false);
+    clearForm();
   };
 
   const formatDate = (dateString) => {
@@ -112,35 +108,35 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
     const day = String(date.getDate()).padStart(2, '0');
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const year = date.getFullYear();
-
     return `${day}.${month}.${year}`;
   };
 
   return (
     <div className="add-container">
-      <div className='modal'>
-        <h2>Create a new Memory</h2>
+      <div className="modal">
+        <h2>{isEditMode ? 'Edit Memory' : 'Create a new Memory'}</h2>
         <form onSubmit={handleSubmit}>
           <div className="add-actions">
             <button type="button" className="cancel-button" onClick={onCancel}>
               Cancel
             </button>
+            {isEditMode && (
+              <button type="button" onClick={() => handleDelete(formData._id)}>Delete</button>
+            )}
             <button className="save-button" type="submit">
-              SAVE
+              {isEditMode ? 'Save' : 'Create'}
             </button>
           </div>
           <div className="add-details">
             <div>
-              <select className='detail' value={child} onChange={(e) => onChange('child', e.target.value)}>
+              <select className="detail" value={child} onChange={(e) => onChange('child', e.target.value)}>
                 <option value="">Select Person</option>
                 <option value="Theo">Theo</option>
                 <option value="Sevim">Sevim</option>
               </select>
             </div>
-
-
-						<div>
-              <select  className='detail' value={category} onChange={(e) => onChange('category', e.target.value)}>
+            <div>
+              <select className="detail" value={category} onChange={(e) => onChange('category', e.target.value)}>
                 <option value="">Select Category</option>
                 <option value="birthday">Birthday</option>
                 <option value="play">Play Time</option>
@@ -150,30 +146,23 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
                 <option value="friends">Friends</option>
               </select>
             </div>
-
-						<div>
+            <div>
               <input
-							className='detail'
+                className="detail"
                 type="date"
-								placeholder='Date'
                 onChange={(e) => onChange('date', formatDate(e.target.value))}
               />
             </div>
-						
-
             <div>
-							<input
-							className='detail'
-								type="text"
-								placeholder="Add location"
-								value={location}
-								onChange={(e) => onChange('location', e.target.value)}
-							/>
+              <input
+                className="detail"
+                type="text"
+                placeholder="Add location"
+                value={location}
+                onChange={(e) => onChange('location', e.target.value)}
+              />
             </div>
-
-
           </div>
-
           <input
             type="text"
             className="add-title"
@@ -181,27 +170,23 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
             value={title}
             onChange={(e) => onChange('title', e.target.value)}
           />
-          {/* <div className='description-section'> */}
-            <WebSpeechAPIDemo value={description} onChange={onChange} />
-          {/* </div> */}
+          <WebSpeechAPIDemo value={description} onChange={onChange} />
           <div className="add-media">
             <div className="file-input-wrapper">
-            <div className="media-icon camera" onClick={() => setShowCamera(true)}>
-              📷
-            </div>
-            {showCamera && (
-              <div className="media-preview">
-                <Webcam className="camera-click" audio={false} ref={webcamRef} screenshotFormat="image/png" />
-                <button type="button" onClick={handleTakePicture}>
-                  Take Picture
-                </button>
-                <button type="button" onClick={() => setShowCamera(false)}>
-                  Cancel
-                </button>
+              <div className="media-icon camera" onClick={() => setShowCamera(true)}>
+                📷
               </div>
-            )}
-
-
+              {showCamera && (
+                <div className="media-preview">
+                  <Webcam className="camera-click" audio={false} ref={webcamRef} screenshotFormat="image/png" />
+                  <button type="button" onClick={handleTakePicture}>
+                    Take Picture
+                  </button>
+                  <button type="button" onClick={() => setShowCamera(false)}>
+                    Cancel
+                  </button>
+                </div>
+              )}
               <input
                 type="file"
                 id="fileInput"
@@ -227,7 +212,6 @@ const Add = ({ formData, onChange, onSave, setIsFormVisible }) => {
                 ) : null}
               </div>
             )}
-
           </div>
         </form>
       </div>

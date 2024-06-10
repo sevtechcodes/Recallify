@@ -25,6 +25,28 @@ form {
 	font-size: 16px rgb(164 164 164)
 }
 
+input[type="radio"] {
+	display: none;
+}
+
+.detail-person{
+	display: flex;
+	flex-direction: row;
+}
+.person-div{
+	cursor: pointer;
+	font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+	margin-bottom: 4px;
+	padding: 1px;
+	border: 1px solid;
+	border-radius: 50%;
+
+}
+input[type="radio"]:checked + label {
+	background-color: #78c035; /* Change this to your preferred highlight color */
+}
+
+
 .add-title {
   min-width: 90%;
   padding: 10px;

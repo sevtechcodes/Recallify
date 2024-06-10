@@ -49,11 +49,20 @@ p.description{
 	font-size: 12px;
 }
 
-.edit-link{
+.edit-button{
 	display: flex;
 	justify-content: end;
 	font-size: bold 16px;
+	border-radius: 4px;
 	/* align-items: end; */
+}
+
+div.edit-button{
+	border: none;
+}
+.edit{
+	border: solid 1px gray;
+	border-radius: 4px;
 }
 
 .memory-details{
