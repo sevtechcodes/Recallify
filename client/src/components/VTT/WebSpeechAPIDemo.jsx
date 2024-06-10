@@ -1,14 +1,15 @@
-// src/SpeechRecognition.js
 import React, { useState, useEffect, useRef } from 'react';
-import './style.css';
-const SpeechRecognition = () => {
+import mic from './images/mic.gif';
+import slash from './images/mic-slash.gif';
+import animation from './images/mic-animation.gif';
+import './style.css'
+const WebSpeechAPIDemo = ({ value, onChange }) => {
   const [listening, setListening] = useState(false);
-  const [transcript, setTranscript] = useState('');
   const [language, setLanguage] = useState('en-US');
+  const [permissionDenied, setPermissionDenied] = useState(false);
   const recognition = useRef(null);
 
   useEffect(() => {
-    // Initialize the webkitSpeechRecognition object
     if ('webkitSpeechRecognition' in window) {
       recognition.current = new window.webkitSpeechRecognition();
       recognition.current.continuous = true;
@@ -19,7 +20,7 @@ const SpeechRecognition = () => {
         for (let i = event.resultIndex; i < event.results.length; i++) {
           const transcriptPart = event.results[i][0].transcript;
           if (event.results[i].isFinal) {
-            setTranscript((prev) => prev + transcriptPart);
+            onChange('description', value + transcriptPart);
           } else {
             interimTranscript += transcriptPart;
           }
@@ -32,86 +33,71 @@ const SpeechRecognition = () => {
     } else {
       console.error('Web Speech API is not supported in this browser.');
     }
-  }, []);
+  }, [value, onChange]);
 
   useEffect(() => {
-    // Update the recognition language whenever the language state changes
     if (recognition.current) {
       recognition.current.lang = language;
     }
   }, [language]);
 
-  const handleListen = () => {
-    if (listening) {
-      recognition.current.stop();
+  const handleStartButtonClick = async () => {
+    if (!listening) {
+      try {
+        await navigator.mediaDevices.getUserMedia({ audio: true });
+        recognition.current.start();
+        setListening(true);
+      } catch (error) {
+        console.error('Permission denied for microphone access:', error);
+        setPermissionDenied(true);
+      }
     } else {
-      recognition.current.start();
+      recognition.current.stop();
+      setListening(false);
     }
-    setListening((prev) => !prev);
   };
 
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
   };
 
-  const handleTranscriptChange = (event) => {
-    setTranscript(event.target.value);
-  };
-
   return (
-    <div>
-      <div className='speech-container'>
-			<h3 class="text-center">Web Speech API Demo</h3>
-			<div id="info"></div>
-			<div class="float-right">
-        <button id="start_button"> 
-          <img id="start_img" src="images/mic.gif" alt="Start"/>
-				</button>
-      </div>
-			<div id="results">
-        <span id="final_span" class="final"></span>
-        <span id="interim_span" class="interim"></span>
-        <p/>
-      </div>
+    <div className='description-speech'>
+				<div>
+					<textarea
+					className='textarea'
+						value={value}
+						placeholder='Tell me more ...'
+						onChange={(e) => onChange('description', e.target.value)}
+						rows="10"
+						cols="65"
+						disabled={listening}
+					/>
+				</div>
+				<div className='speech-control'>
+					<button id='speech-button' onClick={handleStartButtonClick} style={{ cursor: 'pointer' }}>
+						{permissionDenied ? (
+							<img src={slash} alt="Denied" style={{ width: '40px', height: '40px' }} />
+						) : listening ? (
+							<img src={animation} alt="Listening" style={{ width: '40px', height: '40px' }} />
+						) : (
+							<img src={mic} alt="Start Listening" style={{ width: '40px', height: '40px' }} />
+						)}
+					</button>
+					<label htmlFor="language">Language: </label>
+					<select id="language" value={language} onChange={handleLanguageChange}>
+						<option value="en-US">English (US)</option>
+						<option value="en-GB">English (UK)</option>
+						<option value="tr-TR">Turkish</option>
+						<option value="es-ES">Spanish (Spain)</option>
+						<option value="de-DE">German</option>
+					</select>
 
-			<textarea 
-        value={transcript} 
-        onChange={handleTranscriptChange} 
-        rows="10" 
-        cols="50" 
-      />
+				</div>
 
-        <label htmlFor="language">Choose language: </label>
-        <select id="language" value={language} onChange={handleLanguageChange}>
-          <option value="en-US">English (US)</option>
-          <option value="en-GB">English (UK)</option>
-          <option value="es-ES">Spanish (Spain)</option>
-          <option value="fr-FR">French</option>
-          <option value="de-DE">German</option>
-          <option value="zh-CN">Chinese (Mandarin)</option>
-          <option value="ja-JP">Japanese</option>
-          <option value="ru-RU">Russian</option>
-          <option value="ko-KR">Korean</option>
-          <option value="it-IT">Italian</option>
-          <option value="pt-BR">Portuguese (Brazil)</option>
-          <option value="ar-SA">Arabic</option>
-          {/* Add more languages as needed */}
-        </select>
-      </div>
-      <button onClick={handleListen} style={{ cursor: 'pointer' }}>
-        {/* {listening ? '🎤 Stop Listening' : '🎤 Start Listening'} */}
-				{listening ? (
-        // GIF for during listening
-        <img src="./images/mic-animation.gif" alt="Listening" />
-      ) : (
-        // GIF for start
-        <img src="./images/mic.gif" alt="Start" />
-      )}
-				
-      </button>
 
     </div>
   );
 };
 
-export default SpeechRecognition;
+export default WebSpeechAPIDemo;
