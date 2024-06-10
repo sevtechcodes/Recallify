@@ -10,13 +10,14 @@ const getMemories = async (req, res) => {
 };
 
 const createMemory = async (req, res) => {
-  const { title, media, description, child, location, date, category } = req.body;
+  const { title, media, mediaType, description, child, location, date, category } = req.body;
 
   try {
     // Create an object with the non-empty fields only
     const memoryData = {};
     if (title) memoryData.title = title;
     if (media) memoryData.media = media;
+		if (mediaType) memoryData.mediaType = mediaType;
     if (description) memoryData.description = description;
     if (child) memoryData.child = child;
     if (location) memoryData.location = location;
@@ -43,9 +44,9 @@ const createMemory = async (req, res) => {
 
 const updateMemory = async (req, res) => {
 	const { id } = req.params;
-  const { title, media, description, child, location, date, category } = req.body;
+  const { title, media, mediaType, description, child, location, date, category } = req.body;
   try {
-    const memory = await Memory.findByIdAndUpdate(id, { title,  media, description, child, location, date, category }, 
+    const memory = await Memory.findByIdAndUpdate(id, { title,  media, mediaType, description, child, location, date, category }, 
 			{ new: true });
     res.json(memory);
   } catch (error) {

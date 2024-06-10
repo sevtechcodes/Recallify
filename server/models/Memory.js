@@ -2,16 +2,14 @@ const mongoose = require('mongoose');
 
 // Define MemorySchema
 const MemorySchema = new mongoose.Schema({
-	title: {type: String},
-	media: {type: String
-	},
-	mediaType:{ type: String},
-
-	description: {type: String},
-	child: {type: String},
-	location: {type: String},
-	date: { type: String},
-	category: {type: String},
+	title: String,
+	media: String,
+	mediaType:String,
+	description:String,
+	child: String,
+	location: String,
+	date:String,
+	category: String,
 });
 
 const Memory = mongoose.model('Memory', MemorySchema);

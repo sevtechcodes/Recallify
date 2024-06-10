@@ -10,6 +10,7 @@ const MemoList = ({ memories, handleEditMemory }) => {
         <ul className="item-list">
           {memories.map((memory) => (
             <li key={memory._id} className="item">
+							{console.log('I am checking mediaType in Listing',memory.mediaType)}
               <div className="edit-button">
                 <button className='edit' onClick={() => handleEditMemory(memory)}>Edit</button>
               </div>
@@ -18,14 +19,14 @@ const MemoList = ({ memories, handleEditMemory }) => {
 
               <div className="memory-details">
                 <div className="media-info">
-                  {memory=== 'video' && (
+                  {memory.mediaType=== 'video' && (
                     <video className="list-video-item" controls width="300px">
                       <source src={memory.media} type="video/mp4" />
                     </video>
                   )}
 
                   {memory.mediaType === 'image' && (
-                    <img className="list-image-item" src={memory.media} alt="Memory" />
+                    <img className="list-image-item"  width="300px" src={memory.media} alt="Memory" />
                   )}
                 </div>
 
