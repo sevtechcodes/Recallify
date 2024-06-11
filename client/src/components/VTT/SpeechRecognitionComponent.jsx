@@ -59,7 +59,7 @@ const SpeechRecognitionComponent = ({ description, setDescription, isListening, 
       <button onClick={() => setIsListening((prev) => !prev)}>
         {isListening ? 'Stop' : 'Start'} Listening
       </button>
-      {/* Text area removed */}
+      
     </div>
   );
 };
