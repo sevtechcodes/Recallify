@@ -118,6 +118,7 @@ const App = () => {
             onSave={handleSave}
             setIsFormVisible={setIsFormVisible}
             isEditMode={isEditMode}
+						setIsEditMode={setIsEditMode}
             handleDelete={handleDelete}
           />
         )}

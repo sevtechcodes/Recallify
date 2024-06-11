@@ -2,12 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import mic from './images/mic.gif';
 import slash from './images/mic-slash.gif';
 import animation from './images/mic-animation.gif';
-import './style.css'
+import './style.css';
+
 const WebSpeechAPIDemo = ({ value, onChange }) => {
+	
   const [listening, setListening] = useState(false);
   const [language, setLanguage] = useState('en-US');
   const [permissionDenied, setPermissionDenied] = useState(false);
   const recognition = useRef(null);
+  const [interimValue, setInterimValue] = useState(value);
 
   useEffect(() => {
     if ('webkitSpeechRecognition' in window) {
@@ -20,11 +23,13 @@ const WebSpeechAPIDemo = ({ value, onChange }) => {
         for (let i = event.resultIndex; i < event.results.length; i++) {
           const transcriptPart = event.results[i][0].transcript;
           if (event.results[i].isFinal) {
-            onChange('description', value + transcriptPart);
+            onChange('description', interimValue + transcriptPart);
+            setInterimValue(prevValue => prevValue + '' + transcriptPart);
           } else {
             interimTranscript += transcriptPart;
           }
         }
+        setInterimValue(interimValue + interimTranscript);
       };
 
       recognition.current.onerror = (event) => {
@@ -33,7 +38,7 @@ const WebSpeechAPIDemo = ({ value, onChange }) => {
     } else {
       console.error('Web Speech API is not supported in this browser.');
     }
-  }, [value, onChange]);
+  }, [interimValue, onChange]);
 
   useEffect(() => {
     if (recognition.current) {
@@ -63,39 +68,39 @@ const WebSpeechAPIDemo = ({ value, onChange }) => {
 
   return (
     <div className='description-speech'>
-				<div>
-					<textarea
-					className='textarea'
-						value={value}
-						placeholder='Tell me more ...'
-						onChange={(e) => onChange('description', e.target.value)}
-						rows="10"
-						cols="65"
-						disabled={listening}
-					/>
-				</div>
-				<div className='speech-control'>
-					<button id='speech-button' onClick={handleStartButtonClick} style={{ cursor: 'pointer' }}>
-						{permissionDenied ? (
-							<img src={slash} alt="Denied" style={{ width: '40px', height: '40px' }} />
-						) : listening ? (
-							<img src={animation} alt="Listening" style={{ width: '40px', height: '40px' }} />
-						) : (
-							<img src={mic} alt="Start Listening" style={{ width: '40px', height: '40px' }} />
-						)}
-					</button>
-					<label htmlFor="language">Language: </label>
-					<select id="language" value={language} onChange={handleLanguageChange}>
-						<option value="en-US">English (US)</option>
-						<option value="en-GB">English (UK)</option>
-						<option value="tr-TR">Turkish</option>
-						<option value="es-ES">Spanish (Spain)</option>
-						<option value="de-DE">German</option>
-					</select>
-
-				</div>
-
-
+      <div>
+        <textarea
+          className='textarea'
+          value={interimValue}
+          placeholder='Tell me more ...'
+          onChange={(e) => {
+            onChange('description', e.target.value);
+            setInterimValue(e.target.value);
+          }}
+          rows="10"
+          cols="65"
+          disabled={listening}
+        />
+      </div>
+      <div className='speech-control'>
+        <button id='speech-button' onClick={handleStartButtonClick} style={{ cursor: 'pointer' }}>
+          {permissionDenied ? (
+            <img src={slash} alt="Denied" style={{ width: '40px', height: '40px' }} />
+          ) : listening ? (
+            <img src={animation} alt="Listening" style={{ width: '40px', height: '40px' }} />
+          ) : (
+            <img src={mic} alt="Start Listening" style={{ width: '40px', height: '40px' }} />
+          )}
+        </button>
+        <label htmlFor="language">Language: </label>
+        <select id="language" value={language} onChange={handleLanguageChange}>
+          <option value="en-US">English (US)</option>
+          <option value="en-GB">English (UK)</option>
+          <option value="tr-TR">Turkish</option>
+          <option value="es-ES">Spanish (Spain)</option>
+          <option value="de-DE">German</option>
+        </select>
+      </div>
     </div>
   );
 };

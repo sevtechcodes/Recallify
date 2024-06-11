@@ -5,10 +5,26 @@
 	box-sizing: border-box;
   width: 100vw;
   background: black;
-  /* padding: 0 5vh; */
-  display: flex;
+	padding-left: 10%;
+	padding-right: 10%;
+
+}
+.navbar-content{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
 	align-items: center;
-	gap: 25%;
+	gap: 30%;
+}
+
+/* Mobile layout */
+@media (max-width: 1080px) {
+	.navbar-content{
+		display: flex;
+		flex-direction: column;
+}
+
+
 
 }
 
@@ -26,8 +42,8 @@
 
 .stick-create-button{
 	background-color: rgba(95, 208, 78);
-	width: 135px;
-	height: 66px;
+	/* width: 135px;
+	height: 66px; */
 	padding: 10px 20px;
 	font-size: 20px;
 	border-radius: 12px;

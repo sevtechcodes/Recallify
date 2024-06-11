@@ -52,7 +52,7 @@ input[type="radio"]:checked + label {
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid black;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .add-description {
@@ -61,6 +61,7 @@ input[type="radio"]:checked + label {
   padding: 10px;
   border-radius: 4px;
   border: none;
+	border: 1px solid black;
 }
 
 .listen-button {
@@ -125,10 +126,8 @@ h1 {
   border: 1px solid black;
   border-radius: 10px;
   cursor: pointer;
-  /* background-color: #f0f0f0; */
   color: black;
 }
-
 
 .save-button{
 	background-color: rgb(240 249 239)
@@ -154,7 +153,7 @@ h1 {
 
 .file-input-wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction:column;
   align-items: center;
   width: 100%;
   position: relative;
@@ -162,6 +161,16 @@ h1 {
 
 #fileInput{
 	padding-bottom: 8px;
+}
+
+.camera-section{
+	display: flex;
+	flex-direction: column;
+}
+
+.file-section{
+	display: flex;
+	flex-direction: column;
 }
 
 .close-form-button {
@@ -234,8 +243,8 @@ h1 {
 
 .media-preview img,
 .media-preview video {
-  max-width: 190px;
-	max-height: 120px;
+  width: 190px;
+	height: 120px;
   border-radius: 10px;
   /* margin: 10px; */
 }

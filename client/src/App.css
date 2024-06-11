@@ -2,7 +2,10 @@ body{
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+}
 
+.main-section{
+	width: 100%
 }
 
 .first-section{
@@ -36,4 +39,8 @@ body{
 .create-form{
 	z-index: 20;
 	position: relative;
+}
+
+.navbar{
+	margin-bottom: 5%;
 }

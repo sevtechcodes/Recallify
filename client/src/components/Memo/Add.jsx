@@ -3,7 +3,6 @@ import Webcam from 'react-webcam';
 import './addStyle.css';
 import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
-import WebSpeechAPIDemo from '../VTT/WebSpeechAPIDemo';
 
 const Add = ({ 
   formData, 
@@ -11,6 +10,7 @@ const Add = ({
   onSave, 
   setIsFormVisible, 
   isEditMode, 
+	setIsEditMode,
   handleDelete 
 }) => {
   const { title, description, child, location, date, category } = formData;
@@ -98,8 +98,9 @@ const Add = ({
     }
   };
 
-  const   onCancel = () => {
+  const onCancel = () => {
     clearForm();
+		setIsEditMode(false); // Set isEditMode to false
   };
 
   const formatDate = (dateString) => {
@@ -115,12 +116,13 @@ const Add = ({
       <div className="modal">
         <h2>{isEditMode ? 'Edit Memory' : 'Create a new Memory'}</h2>
         <form onSubmit={handleSubmit}>
+
           <div className="add-actions">
             <button type="button" className="cancel-button" onClick={onCancel}>
               Cancel
             </button>
             {isEditMode && (
-              <button type="button" onClick={() => handleDelete(formData._id)}>Delete</button>
+              <button type="button"  className="delete-button" onClick={() => handleDelete(formData._id)}>Delete</button>
             )}
             <button className="save-button" type="submit">
               {isEditMode ? 'Save' : 'Create'}
@@ -169,48 +171,62 @@ const Add = ({
             value={title}
             onChange={(e) => onChange('title', e.target.value)}
           />
-          <WebSpeechAPIDemo value={description} onChange={(value) => onChange('description', value)} />
+
+					<textarea
+						type="text"
+						className="add-description"
+						placeholder="Type description"
+						value={description}
+						onChange={(e) => onChange('description', e.target.value)}
+					></textarea>
+
           <div className="add-media">
+						{/* <h4>Add Media</h4> */}
             <div className="file-input-wrapper">
-              <div className="media-icon camera" onClick={() => setShowCamera(true)}>
-                📷
-              </div>
-              {showCamera && (
-                <div className="media-preview">
-                  <Webcam className="camera-click" audio={false} ref={webcamRef} screenshotFormat="image/png" />
-                  <button type="button" onClick={handleTakePicture}>
-                    Take Picture
-                  </button>
-                  <button type="button" onClick={() => setShowCamera(false)}>
-                    Cancel
-                  </button>
-                </div>
-              )}
-              <input
-                type="file"
-                id="fileInput"
-                name="fileInput"
-                accept="image/*,video/*"
-                onChange={handleFileChange}
-              />
+							<div className="camere-section">
+								<div className="media-icon camera" onClick={() => setShowCamera(true)}>
+									📷
+								</div>
+								{showCamera && (
+									<div className="media-preview">
+										<Webcam className="camera-click" audio={false} ref={webcamRef} screenshotFormat="image/png" />
+										<button type="button" onClick={handleTakePicture}>
+											Take Picture
+										</button>
+										<button type="button" onClick={() => setShowCamera(false)}>
+											Cancel
+										</button>
+									</div>
+								)}
+							</div>
+							<div className="file-section">
+									<input
+										type="file"
+										id="fileInput"
+										name="fileInput"
+										accept="image/*,video/*"
+										onChange={handleFileChange}
+									/>
+									{progress > 0 && (
+										<div className="progress-container">
+											<div className="progress-bar" style={{ width: `${progress}%` }}></div>
+											<span className="progress-text">{progress.toFixed(2)}%</span>
+										</div>
+									)}
+									{previewUrl && (
+										<div className="media-preview">
+											{mediaType === 'image' ? (
+												<img src={previewUrl} width="170px" height="170px" alt="Preview" />
+											) : mediaType === 'video' ? (
+												<video controls width="170px" height="170px">
+													<source src={previewUrl} type={mediaFile.type} />
+												</video>
+											) : null}
+										</div>
+									)}
+							</div>
             </div>
-            {progress > 0 && (
-              <div className="progress-container">
-                <div className="progress-bar" style={{ width: `${progress}%` }}></div>
-                <span className="progress-text">{progress.toFixed(2)}%</span>
-              </div>
-            )}
-            {previewUrl && (
-              <div className="media-preview">
-                {mediaType === 'image' ? (
-                  <img src={previewUrl} width="170px" height="170px" alt="Preview" />
-                ) : mediaType === 'video' ? (
-                  <video controls width="170px" height="170px">
-                    <source src={previewUrl} type={mediaFile.type} />
-                  </video>
-                ) : null}
-              </div>
-            )}
+
           </div>
         </form>
       </div>
