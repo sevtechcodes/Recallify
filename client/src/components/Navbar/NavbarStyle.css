@@ -14,7 +14,7 @@
 	flex-direction: row;
 	justify-content: space-around;
 	align-items: center;
-	gap: 30%;
+	gap: 5%;
 }
 
 /* Mobile layout */
@@ -22,14 +22,21 @@
 	.navbar-content{
 		display: flex;
 		flex-direction: column;
-}
+		}
 
-
-
+		.logo {
+			width: 15%;
+			/* width: 18%;
+			padding-bottom: 0px;
+			margin-top: 8px; */
+		}
+		.my-memories-text {
+			margin: 1px;
+		}
 }
 
 .logo{
-	width: 12%;
+	width: 15%;
 	padding-bottom: 35px;
 	padding-left: 20px;
 }
@@ -42,11 +49,10 @@
 
 .stick-create-button{
 	background-color: rgba(95, 208, 78);
-	/* width: 135px;
-	height: 66px; */
 	padding: 10px 20px;
 	font-size: 20px;
 	border-radius: 12px;
 	border: none;
 	cursor: pointer;
+	height: 75px;
 }

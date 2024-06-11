@@ -5,10 +5,10 @@
 }
 
 .my-list-text{
- text-align: center;
- font-size: 3.2em;
- font-weight: 900;
- margin: 5px;
+	text-align: center;
+	font-size: 3.2em;
+	font-weight: 900;
+	margin: 5px;
 
 }
 
@@ -43,7 +43,6 @@ p.description{
 	font-size: 1rem;
 	border-radius: 10px;
 	padding: 20px;
-	margin: 20px;
 	box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5);
 }
 
@@ -84,8 +83,12 @@ div.edit-button{
 	/* min-height: 250px; */
 	min-width: 500px;
 	border-radius: 15px;
-	padding: 20px;
+	/* padding: 20px; */
 	
+}
+
+div.detail-info{
+	margin:0px;
 }
 .media{
 

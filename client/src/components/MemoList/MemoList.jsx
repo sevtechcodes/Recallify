@@ -42,12 +42,8 @@ const MemoList = ({ memories, handleEditMemory }) => {
 								
 
                 <div className="detail-info">
-                  <div className="description-area">
                     <p className="description">{memory.description}</p>
                   </div>
-
-
-                </div>
               </div>
             </li>
           ))}
