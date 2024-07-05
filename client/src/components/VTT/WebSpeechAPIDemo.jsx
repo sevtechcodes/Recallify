@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import mic from './images/mic.gif';
 import slash from './images/mic-slash.gif';
 import animation from './images/mic-animation.gif';

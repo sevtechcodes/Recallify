@@ -1,3 +1,4 @@
+//Format for memory date
 const formatDate = (dateString) => {
 	const date = new Date(dateString);
 	const day = String(date.getDate()).padStart(2, '0');
@@ -7,5 +8,4 @@ const formatDate = (dateString) => {
 	return `${day}.${month}.${year}`;
 };
 
-
-exports.default = formatDate;
+export default formatDate;

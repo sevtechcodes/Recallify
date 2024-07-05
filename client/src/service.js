@@ -1,4 +1,3 @@
-//I want to move fetch requests here
 import axios from 'axios';
 const apiUrl = 'http://localhost:3000/memories';
 
@@ -34,17 +33,6 @@ export const updateMemory = async (id, memoryData) => {
     throw error;
   }
 };
-
-// export const updateMemory = async (id, title, media, description, child, location, date, category) => {
-//   try {
-//     const response = await axios.put(`${apiUrl}/${id}`, title, media, description, child, location, date, category );
-//     return response.data;
-//   } catch (error) {
-//     console.error('Error updating item:', error);
-//     throw error;
-//   }
-// };
-
 
 export const deleteMemory = async (id) => {
   try {

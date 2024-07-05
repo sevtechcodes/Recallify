@@ -3,3 +3,6 @@ serviceAccountKey.json
 
 # Ignore environment variables file
 .env
+
+# node modules
+node_modules
