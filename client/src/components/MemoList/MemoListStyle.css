@@ -22,9 +22,6 @@
 
 
   flex-wrap: wrap;
-	/* align-content: center; */
-  /* height: 900px; */
-  /* overflow: auto; */
 	margin-top: 5%;
 
 }
@@ -47,7 +44,6 @@ p.description{
 }
 
 .media-notes{
-	/* padding: 20px */
 	font-size: 12px;
 }
 .list-image-item{
@@ -59,7 +55,6 @@ p.description{
 	justify-content: end;
 	font-size: bold 16px;
 	border-radius: 4px;
-	/* align-items: end; */
 }
 
 div.edit-button{
@@ -80,10 +75,8 @@ div.edit-button{
 
 .detail-info{
 	display: flex;
-	/* min-height: 250px; */
 	min-width: 500px;
 	border-radius: 15px;
-	/* padding: 20px; */
 	
 }
 
@@ -97,18 +90,13 @@ div.detail-info{
 	border-radius: 10px;
 }
 
-/* 
-.media-info{
-	max-height: 200px;
-	max-width: 200px;
-} */
 
 ul {
 	display: flex;
 	flex-direction: column;
 	align-content: flex-start;
-	list-style: none; /* Removes bullet points */
-	padding: 0; /* Optional: removes default padding */
+	list-style: none;
+	padding: 0; 
 }
 
 .item{
@@ -116,7 +104,7 @@ ul {
 	padding: 20px;
 	margin: 20px; 
 	border: 1px solid #ccc;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); /* Adds shadow to the div */
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.5); 
 }
 
 .my-list-text{
@@ -128,10 +116,6 @@ ul {
 	flex-direction: column;
 }
 
-
-
-
-/* Desktop layout */
 .memory-details {
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
@@ -156,31 +140,18 @@ ul {
 		align-items: center;
 	}
 	.memory-details {
-			grid-template-columns: 1fr; /* Single column layout */
-			grid-template-rows: auto; /* Adjust row heights automatically */
-			grid-column-gap: 0px; /* No column gaps needed */
-			grid-row-gap: 10px; /* Add some space between rows */
+			grid-template-columns: 1fr; 
+			grid-template-rows: auto; 
+			grid-column-gap: 0px; 
+			grid-row-gap: 10px; 
 	}
 
 	.image-section {
-			grid-area: auto / auto / auto / auto; /* Default area */
+			grid-area: auto / auto / auto / auto; 
 	}
 
 	.detail-info {
-			grid-area: auto / auto / auto / auto; /* Default area */
+			grid-area: auto / auto / auto / auto; 
 	}
 }
 
-/* 
-.memory-details {
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
-	grid-template-rows: 1fr;
-	grid-column-gap: 10px;
-	grid-row-gap: 0px;
-	}
-	
-	.image-section { grid-area: 1 / 1 / 2 / 3; }
-	.detail-info { grid-area: 1 / 3 / 2 / 6; }
-
- */

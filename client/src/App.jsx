@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import MemoList from './components/MemoList/MemoList';
@@ -34,22 +34,6 @@ const App = () => {
     };
     fetchMemories();
   }, []);
-
-  const handleCreateNewItem = () => {
-    setFormData({
-      title: '',
-      media: '',
-      mediaType: '',
-      description: '',
-      child: '',
-      location: '',
-      date: '',
-      category: '',
-    });
-    setIsFormVisible(true);
-    setIsEditMode(false);
-    setSelectedMemory(null);
-  };
 
   const handleEditMemory = (memory) => {
     setFormData(memory);

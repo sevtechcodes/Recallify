@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Webcam from 'react-webcam';
 import './addStyle.css';
 import { storage } from '../../firebase';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import WebSpeechAPIDemo from '../VTT/WebSpeechAPIDemo';
+import formatDate from './formateDate';
 
 const Add = ({
   formData,
@@ -102,14 +103,6 @@ const Add = ({
   const onCancel = () => {
     clearForm();
     setIsEditMode(false);
-  };
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}.${month}.${year}`;
   };
 
   return (
