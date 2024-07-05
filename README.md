@@ -1,12 +1,17 @@
 ## Recallify
 **A Personal Memory Recording Web App**
 
-Recallify is a platform designed to improve memory recall. It serves as a personal memory recording web application where users can preserve videos, voice recordings, images, and notes. The primary aim is to immortalize cherished moments for future recollection.
+Recallify is a platform designed to improve memory recall. It serves as a personal memory recording web application where users can preserve videos, images, and take notes with by typing or voice. The primary aim is to immortalize cherished moments for future recollection.
 
-## Repository
-https://github.com/sevtechcodes/Recallify.git
+## Screenshots
 
-## MVP - Key Features
+<p align="center">
+  <img src="images/image.png" />
+  <img src="images/image-1.png" />
+	<img src="images/image-2.png" />
+</p>
+
+## Key Features
 **With Recallify, users can create, read, edit, and delete memories effortlessly:**
 
 **Create Memory:** Users could easily capture new memories by uploading videos, pictures, or recording voice notes directly within the app.
@@ -18,8 +23,8 @@ https://github.com/sevtechcodes/Recallify.git
 **Delete Memory:** Recallify allowed users to delete memories they no longer wished to keep, ensuring they could curate their digital archive according to their preferences.
 
 
-## Technologies Used
-List the main technologies, frameworks, and libraries used in the project:
+## Tech Stack
+The main technologies, frameworks, and libraries used in the project:
 - Frontend:
 	- React
 	- Axios
@@ -31,40 +36,53 @@ List the main technologies, frameworks, and libraries used in the project:
 - Backend:
   - Node.js
   - Express
+  - MongoDB
   - Mongoose 
 
-**Data Sources**
-	-Local storage
-	-Firebase storage for media
+## Getting started
 
-## Getting Started
-
-## Prerequisites
-- Node.js
+### Prerequisites
+- Node
+- Git
 - npm 
 - MongoDB
-- Firebase storage credentials
+- [Firebase Storage](https://firebase.google.com/) to obtain the API Key credentials
 
 ### Installation
 
-1. **Clone the repository:**
+1. Clone the repo
 
-   ```bash 
-	 git clone https://github.com/sevtechcodes/Recallify.git
+```
+git clone https://github.com/sevtechcodes/Recallify.git
+```
 
-1. **Install dependencies:**
--cd Recallify
+2. Install dependencies
+```
+npm install
+```
 
+3. To start server
+```
+cd server
+```
+```
+npm install
+```
+```
+npm start
+```
 
--cd server
--npm install
--npm start
+3. To run client
+```
+cd client
+```
+```
+npm install
+```
+```
+npm run dev
+```
 
--cd client
--npm install
--npm run dev
-
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-
+## Developer
+* Sevim Tas Joseph [GitHub](https://github.com/sevtechcodes)
+* [LinkedIn](https://www.linkedin.com/in/sevimjoseph)
