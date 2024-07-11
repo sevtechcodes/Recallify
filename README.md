@@ -49,20 +49,13 @@ List the main technologies, frameworks, and libraries used in the project:
 
 1. **Clone the repository:**
 
-   ```bash 
-	 git clone https://github.com/sevtechcodes/Recallify.git
+   ```git clone https://github.com/sevtechcodes/Recallify.git```
 
 1. **Install dependencies:**
--cd Recallify
 
-
--cd server
--npm install
--npm start
-
--cd client
--npm install
--npm run dev
+ ```cd Recallify```
+	 
+```npm start```
 
 ![alt text](image.png)
 ![alt text](image-1.png)
