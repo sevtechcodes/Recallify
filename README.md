@@ -1,25 +1,34 @@
-## Recallify
-**A Personal Memory Recording Web App**
+## Recallify - A Personal Memory Recording Web App
 
-Recallify is a platform designed to improve memory recall. It serves as a personal memory recording web application where users can preserve videos, voice recordings, images, and notes. The primary aim is to immortalize cherished moments for future recollection.
+**Never Forget Your Most Cherished Memories Again**
 
-## Repository
-https://github.com/sevtechcodes/Recallify.git
+Do you ever wish you could hold onto every special moment forever?
 
-## MVP - Key Features
-**With Recallify, users can create, read, edit, and delete memories effortlessly:**
+Introducing Recallify, the personal memory vault that empowers you to effortlessly capture, preserve, and relive your most treasured experiences.
 
-**Create Memory:** Users could easily capture new memories by uploading videos, pictures, or recording voice notes directly within the app.
+## Key Features
+With Recallify, you can:
 
-**Read Memory:** Each memory was presented in a visually appealing format, allowing users to revisit their captured moments with ease. Whether browsing through a photo, playing back a video, or reading through notes.
+Capture Memories in an Instant: Upload videos, photos, or record voice notes directly within the app.
 
-**Edit Memory:** Recognizing the impermanence of memory, Recallify is designed to be flexible. Users could edit details of their memories – adding captions, updating descriptions, or even attaching additional media to enrich the story.
+Immerse Yourself in the Past: Relive your memories in a visually stunning format, whether you're browsing photos, playing videos, or revisiting written notes.
 
-**Delete Memory:** Recallify allowed users to delete memories they no longer wished to keep, ensuring they could curate their digital archive according to their preferences.
+Keep Your Memories Evolving: Life changes, and so can your memories. Recallify allows you to edit details, add captions, update descriptions, or even attach additional media to enhance your story.
+
+Curate Your Digital Archive: Recallify empowers you to control your memories. Delete what no longer sparks joy and keep what matters most.
+Recallify is more than just a memory storage app; it's a place to build a lasting legacy of your life's most precious moments.
 
 
-## Technologies Used
-List the main technologies, frameworks, and libraries used in the project:
+## Screenshots
+
+<p align="center">
+  <img src="images/image.png" />
+  <img src="images/image-1.png" />
+	<img src="images/image-2.png" />
+</p>
+
+## Tech Stack
+The main technologies, frameworks, and libraries used in the project:
 - Frontend:
 	- React
 	- Axios
@@ -31,23 +40,21 @@ List the main technologies, frameworks, and libraries used in the project:
 - Backend:
   - Node.js
   - Express
+  - MongoDB
   - Mongoose 
 
-**Data Sources**
-	-Local storage
-	-Firebase storage for media
+## Getting started
 
-## Getting Started
-
-## Prerequisites
-- Node.js
+### Prerequisites
+- Node
+- Git
 - npm 
 - MongoDB
-- Firebase storage credentials
+- [Firebase Storage](https://firebase.google.com/) to obtain the API Key credentials
 
 ### Installation
 
-1. **Clone the repository:**
+1. Clone the repo
 
    ```git clone https://github.com/sevtechcodes/Recallify.git```
 
