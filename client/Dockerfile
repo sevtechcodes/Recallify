@@ -1,11 +1,37 @@
-# Stage 1: Build the React app
-FROM  node:20.13.1 as builder
+# # Stage 1: Build the React app
+# FROM  node:20.13.1 as builder
 
-# Set the working directory
+# # Set the working directory
+# WORKDIR /app
+
+# # Copy package.json and package-lock.json
+# COPY package.json .
+
+# # Install dependencies
+# RUN npm install
+
+# # Copy the rest of the application code
+# COPY . .
+
+# # Build the React app
+# RUN npm run build
+
+# # Copy other files to my current directory
+# COPY . .
+
+# # Open the port for the express server
+# EXPOSE 3001
+
+# # Run express rum in the foreground
+# CMD ["npm", "run", "dev"]
+
+# Stage 1: Build the React application
+FROM node:14-alpine AS build
+
 WORKDIR /app
 
 # Copy package.json and package-lock.json
-COPY package.json .
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
@@ -13,14 +39,22 @@ RUN npm install
 # Copy the rest of the application code
 COPY . .
 
-# Build the React app
+# Build the application
 RUN npm run build
 
-# Copy other files to my current directory
-COPY . .
+# Stage 2: Serve the application with Nginx
+FROM nginx:alpine
 
-# Open the port for the express server
-EXPOSE 3001
+# Copy the build output from the build stage
+# COPY --from=build /app/build /usr/share/nginx/html
+COPY . /usr/share/nginx/html
 
-# Run express rum in the foreground
-CMD ["npm", "run", "dev"]
+
+# Expose port 80
+EXPOSE 80
+
+# Start Nginx server
+CMD ["nginx", "-g", "daemon off;"]
+
+
+
