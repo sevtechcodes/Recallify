@@ -1,10 +1,10 @@
 import { useState, useRef } from 'react';
 import Webcam from 'react-webcam';
 import './addStyle.css';
-import { storage } from '../../firebase';
-import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import WebSpeechAPIDemo from '../VTT/WebSpeechAPIDemo';
 import formatDate from './formateDate';
+import { storage } from '../../firebase/firebase';
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 
 const Add = ({
   formData,

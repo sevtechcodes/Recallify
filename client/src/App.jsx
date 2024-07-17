@@ -42,6 +42,7 @@ const App = () => {
     setSelectedMemory(memory);
   };
 
+	console.log("Playing with Docker")
   const handleSave = async (newMemoryData) => {
     try {
       if (isEditMode && selectedMemory) { 
