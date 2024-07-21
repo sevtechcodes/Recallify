@@ -15,7 +15,7 @@ export function AuthProvider({ childeren }){
 	const [userLoggedIn, setUserLoggedIn] = useState(false);
 	const [loading, setLoading] = useState(true); //app trying to load the current auth state
 
-	//subscribe event changes (login, logout,..)
+	//subscribe event changes (login, logout,..) by listening them
 	useEffect(()=>{
 		const unsubscribe = onAuthStateChanged(auth, initializeUser);
 		return unsubscribe;
@@ -23,7 +23,7 @@ export function AuthProvider({ childeren }){
 
 	async function initializeUser(user){
 		if(user){
-			setCurrentUser({ ...user});
+			setCurrentUser({ ...user}); //spreading out the users properties into a new object. So that we are not maintaining any references to this user arguman.
 			setUserLoggedIn(true);
 		} else{
 			setCurrentUser(null);
