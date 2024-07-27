@@ -25,6 +25,7 @@
 # # Run express rum in the foreground
 # CMD ["npm", "run", "dev"]
 
+
 # Stage 1: Build the React application
 FROM node:14-alpine AS build
 
