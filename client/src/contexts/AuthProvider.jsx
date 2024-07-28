@@ -1,8 +1,8 @@
-import React, { useContext, useEffect, useState } from "react";
-import { onAuthStateChanged, GoogleAuthProvider } from "firebase/auth";
-import { auth } from "../firebase/firebase";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { onAuthStateChanged, GoogleAuthProvider } from 'firebase/auth';
+import { auth } from '../firebase/firebase';
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export function useAuth() {
   return useContext(AuthContext);
@@ -16,40 +16,33 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, initializeUser);
-    return () => unsubscribe();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setCurrentUser(user);
+        setUserLoggedIn(true);
+
+        const isEmail = user.providerData.some(provider => provider.providerId === 'password');
+        setIsEmailUser(isEmail);
+
+        const isGoogle = user.providerData.some(provider => provider.providerId === GoogleAuthProvider.PROVIDER_ID);
+        setIsGoogleUser(isGoogle);
+      } else {
+        setCurrentUser(null);
+        setUserLoggedIn(false);
+        setIsEmailUser(false);
+        setIsGoogleUser(false);
+      }
+      setLoading(false);
+    });
+
+    return unsubscribe;
   }, []);
 
-  async function initializeUser(user) {
-    if (user) {
-      setCurrentUser({ ...user });
-
-      const isEmail = user.providerData.some(
-        (provider) => provider.providerId === "password"
-      );
-      setIsEmailUser(isEmail);
-
-      const isGoogle = user.providerData.some(
-        (provider) => provider.providerId === GoogleAuthProvider.PROVIDER_ID
-      );
-      setIsGoogleUser(isGoogle);
-
-      setUserLoggedIn(true);
-    } else {
-      setCurrentUser(null);
-      setUserLoggedIn(false);
-      setIsEmailUser(false);
-      setIsGoogleUser(false);
-    }
-    setLoading(false);
-  }
-
   const value = {
+    currentUser,
     userLoggedIn,
     isEmailUser,
     isGoogleUser,
-    currentUser,
-    setCurrentUser,
   };
 
   return (

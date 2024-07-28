@@ -10,7 +10,6 @@ const MemoList = ({ memories, handleEditMemory }) => {
         <ul className="item-list">
           {memories.map((memory) => (
             <li key={memory._id} className="item">
-							{console.log('I am checking mediaType in Listing',memory.mediaType)}
               <div className="edit-button">
                 <button className='edit' onClick={() => handleEditMemory(memory)}>Edit</button>
               </div>
