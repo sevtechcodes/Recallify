@@ -2,6 +2,8 @@
 import { initializeApp } from "firebase/app";
 import { getStorage } from "firebase/storage";
 import { getAuth } from "firebase/auth";
+import {getFirestore} from "firebase/firestore";
+
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -17,8 +19,10 @@ const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 //Firebase storage
 export const storage = getStorage(app);
+export const db = getFirestore(app);
 // Initialize Firebase Authentication and get a reference to the service
-export const auth = getAuth(app);
+export const auth = getAuth();
+
 
 //Using the Authentication emulator involves just a few steps: From the root of your local project directory, running firebase emulators:start.
 //Using the Local Emulator Suite UI for interactive prototyping, or the Authentication emulator REST API for non-interactive testing.
