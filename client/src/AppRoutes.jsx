@@ -15,6 +15,5 @@ function AppRoutes() {
 
   return useRoutes(routesArray);
 }
-
 export default AppRoutes;
 
