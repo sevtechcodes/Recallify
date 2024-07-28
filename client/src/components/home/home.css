@@ -1,0 +1,46 @@
+body{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.main-section{
+	width: 100%
+}
+
+.first-section{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 90px;
+	width: 100vw;
+
+}
+
+.sticky-container {
+	background-color: transparent;
+	display: flex;
+	align-self: center;
+	position: fixed;
+	bottom: 5px;
+}
+
+.create-button{
+	background-color: rgba(95, 208, 78, 0.7);
+	width: 400px;
+	height: 55px;
+	padding: 10px 20px;
+	font-size: 16px;
+	border-radius: 12px;
+	border: none;
+	cursor: pointer;
+}
+
+.create-form{
+	z-index: 20;
+	position: relative;
+}
+
+.navbar{
+	margin-bottom: 5%;
+}
