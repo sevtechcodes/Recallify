@@ -85,7 +85,7 @@ const Home = () => {
 		};
 	
 		const sortMemories = (memories) => {
-			return memories.sort((a, b) => new Date(a.date) - new Date(b.date));
+			return memories.sort((a, b) => new Date(b.date) - new Date(a.date)); //TODO chech the function works?
 		};
 
 

@@ -50,23 +50,19 @@ const Register = () => {
     return (
         <>
             {userLoggedIn && (<Navigate to={'/home'} replace={true} />)}
-
-            <main className="w-full h-screen flex self-center place-content-center place-items-center">
-                <div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl">
-                    <div className="text-center mb-6">
-                        <div className="mt-2">
-                            <h3 className="text-gray-800 text-xl font-semibold sm:text-2xl">Create a New Account</h3>
-                        </div>
-
-                    </div>
+						<main className="w-full h-screen flex self-center place-content-center place-items-center">
+							<div className="w-96 text-gray-600 space-y-5 p-4 shadow-xl border rounded-xl">
+								<div className="text-center">
+									<div className="mt-2">
+										<h3 className="text-gray-800 text-xl font-semibold sm:text-2xl">Create an account</h3>
+									</div>
+								</div>
                     <form
                         onSubmit={handleRegister}
                         className="space-y-4"
                     >
                         <div>
-                            <label className="text-sm text-gray-600 font-bold">
-                                Email
-                            </label>
+                            <label className="text-sm text-gray-600 font-bold">Email</label>
                             <input
                                 type="email"
                                 autoComplete='email'
@@ -143,7 +139,7 @@ const Register = () => {
                         </div>
                     </form>
                 </div>
-            </main>
+					</main>
         </>
     )
 }
