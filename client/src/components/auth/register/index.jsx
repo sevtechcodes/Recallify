@@ -1,27 +1,34 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Navigate, Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../../contexts/AuthProvider'
-import { doCreateUserWithEmailAndPassword } from '../../../firebase/auth'
+import { doCreateUserWithEmailAndPassword } from '../../../firebase/auth';
+
 
 const Register = () => {
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [confirmPassword, setconfirmPassword] = useState('')
-    const [isRegistering, setIsRegistering] = useState(false)
-    const [errorMessage, setErrorMessage] = useState('')
+    const [email, setEmail] = useState('');
+		const [fname, setFname] = useState('');
+		const [lname, setLname] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setconfirmPassword] = useState('');
+    const [isRegistering, setIsRegistering] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
+    const { userLoggedIn } = useAuth();
 
-    const { userLoggedIn } = useAuth()
-
-    const onSubmit = async (e) => {
-        e.preventDefault()
-        if(!isRegistering) {
-            setIsRegistering(true)
-            await doCreateUserWithEmailAndPassword(email, password)
-        }
-    }
+    const handleRegister = async (e) => {
+        e.preventDefault();
+				try{
+					if(!isRegistering) {
+						setIsRegistering(true)
+						const user =  await doCreateUserWithEmailAndPassword(email, password);
+						console.log(user);
+					};
+				}catch(error){
+					console.log('Error during user creation: ', error);
+				};
+    };
 
     return (
         <>
@@ -36,7 +43,7 @@ const Register = () => {
 
                     </div>
                     <form
-                        onSubmit={onSubmit}
+                        onSubmit={handleRegister}
                         className="space-y-4"
                     >
                         <div>
@@ -47,10 +54,35 @@ const Register = () => {
                                 type="email"
                                 autoComplete='email'
                                 required
-                                value={email} onChange={(e) => { setEmail(e.target.value) }}
+                                value ={email} onChange={(e) => {setEmail(e.target.value) }}
                                 className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:indigo-600 shadow-sm rounded-lg transition duration-300"
                             />
                         </div>
+
+												<div>
+                            <label className="text-sm text-gray-600 font-bold">
+                              First Name
+                            </label>
+                            <input
+                              type="text"
+                              required
+                              value={fname} onChange={(e) => { setFname(e.target.value) }}
+                              className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:indigo-600 shadow-sm rounded-lg transition duration-300"
+                            />
+                        </div>
+
+												<div>
+                            <label className="text-sm text-gray-600 font-bold">
+                              Last Name
+                            </label>
+                            <input
+                                type="text"
+                                required
+                                value={lname} onChange={(e) => { setLname(e.target.value) }}
+                                className="w-full mt-2 px-3 py-2 text-gray-500 bg-transparent outline-none border focus:indigo-600 shadow-sm rounded-lg transition duration-300"
+                            />
+                        </div>
+
 
                         <div>
                             <label className="text-sm text-gray-600 font-bold">
@@ -81,7 +113,7 @@ const Register = () => {
                         </div>
 
                         {errorMessage && (
-                            <span className='text-red-600 font-bold'>{errorMessage}</span>
+                          <span className='text-red-600 font-bold'>{errorMessage}</span>
                         )}
 
                         <button
