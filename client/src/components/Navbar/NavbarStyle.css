@@ -47,6 +47,12 @@
 	font-weight: 900;
 }
 
+.my-profile-text{
+	color: whitesmoke;
+	font-size: 1em;
+	font-weight: 600;
+}
+
 .stick-create-button{
 	background-color: rgba(95, 208, 78);
 	padding: 10px 20px;

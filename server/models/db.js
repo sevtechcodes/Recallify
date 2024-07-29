@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 require('dotenv').config(); // This line loads the .env file
 
-const mongoURI = 'mongodb://localhost:27017/Recallify';
+const mongoURI = process.env.MONGO_URI || 'mongodb://localhost:27017/Recallify';
 
 const connectDB = async () => {
   try {
