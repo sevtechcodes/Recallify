@@ -64,7 +64,3 @@ The main technologies, frameworks, and libraries used in the project:
 	 
 ```npm start```
 
-![alt text](image.png)
-![alt text](image-1.png)
-![alt text](image-2.png)
-
