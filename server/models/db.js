@@ -2,8 +2,6 @@ const mongoose = require('mongoose');
 require('dotenv').config(); // This line loads the .env file
 
 const mongoURI = process.env.MONGO_URI;
-console.log('DB: ', mongoURI);
-
 
 const connectDB = async () => {
   try {
